@@ -4,10 +4,12 @@ const systemtray = await Service.import("systemtray");
 
 export default () =>
   Widget.Box({
+    class_name: "systray",
     setup: (self) =>
       self.hook(systemtray, () => {
         self.children = systemtray.items.map((item) =>
           Widget.Button({
+            class_name: "systray-icon",
             css: "padding: 0 4px;",
             child: Widget.Icon({ icon: item.bind("icon") }),
             on_primary_click: (_, event) => item.activate(event),

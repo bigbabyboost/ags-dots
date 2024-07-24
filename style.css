@@ -2,9 +2,32 @@
   font-family: "CommitMono Nerd Font";
   font-size: 14px; }
 
+trough {
+  border: none;
+  box-shadow: none;
+  background-color: #313244; }
+  trough highlight,
+  trough progress {
+    background-image: linear-gradient(#b4befe, #89b4fa);
+    box-shadow: none;
+    min-height: 6px;
+    border: none; }
+
+slider {
+  background-image: none;
+  background-color: transparent;
+  transition-property: all;
+  transition-duration: 300ms;
+  box-shadow: none;
+  border: none; }
+  slider:hover {
+    background-image: linear-gradient(#b4befe, #89b4fa);
+    transition-duration: 100ms;
+    transition: ease-in-out; }
+
 window {
-  background-color: #1e1e1e;
-  color: #181825; }
+  background-color: #181825;
+  color: #313244; }
 
 .bar {
   padding-left: 10px;
@@ -14,7 +37,7 @@ button {
   color: white;
   border: none;
   box-shadow: none;
-  background: #1e1e1e;
+  background: #181825;
   min-width: 0; }
   button:active {
     color: #b4befe; }
@@ -46,9 +69,22 @@ highlight {
   padding-right: 5px; }
   .workspaces button {
     padding-right: 12px; }
+    .workspaces button:nth-child(1) {
+      padding-left: 0; }
+    .workspaces button:nth-last-child(1) {
+      padding-right: 2px; }
   .workspaces .indicator-icons label {
     font-size: 14px;
     font-weight: 900; }
+
+.media {
+  color: #cdd6f4; }
+  .media .player-icon-label {
+    padding-right: 6px;
+    font-family: "Cantarel"; }
+
+.systray button {
+  all: unset; }
 
 .network-indicator {
   color: #89b4fa; }
@@ -65,7 +101,7 @@ label {
 .powermenu-icon {
   font-size: 16px;
   color: #f38ba8;
-  padding-right: 5px; }
+  padding-right: 6px; }
 
 window#notifications {
   all: unset;
@@ -74,7 +110,7 @@ window#notifications {
   window#notifications .notifications {
     margin: 4.8px; }
     window#notifications .notifications .notification {
-      background-color: #1e1e1e;
+      background-color: #181825;
       padding: 10px;
       border: 3px solid #b4befe;
       border-radius: 6px;
@@ -87,18 +123,18 @@ window#notifications {
         font-weight: 400;
         margin-top: 2px; }
       window#notifications .notifications .notification .icon {
-        color: #181825; }
+        color: #313244; }
         window#notifications .notifications .notification .icon.img {
           margin-right: 10px; }
       window#notifications .notifications .notification .time {
         background-color: #a6e3a1;
-        color: #1e1e1e;
+        color: #181825;
         padding: 0 10px;
         margin-right: 10px;
         border-radius: 10rem; }
       window#notifications .notifications .notification .close-button {
         background-color: #f38ba8;
-        color: #1e1e1e; }
+        color: #181825; }
         window#notifications .notifications .notification .close-button:hover {
           background-color: #b4befe;
           color: #181825; }
@@ -108,7 +144,7 @@ window#notifications {
   #osd box {
     min-width: 40px;
     min-height: 14rem;
-    background-color: #1e1e1e;
+    background-color: #181825;
     border-radius: 10px;
     padding: 14px 2px 0px 2px;
     margin-right: 20px;
@@ -125,22 +161,13 @@ window#notifications {
       border-radius: 6px; }
 
 #mpris-player {
+  color: #cdd6f4;
   background-color: #181825;
   border: 2px solid #b4befe; }
+  #mpris-player button {
+    all: unset;
+    color: #cdd6f4; }
   #mpris-player .player-control-icons {
     padding-right: 4px; }
     #mpris-player .player-control-icons label {
       font-size: 20px; }
-  #mpris-player trough highlight,
-  #mpris-player trough progress {
-    background-color: #b4befe;
-    min-height: 6px; }
-  #mpris-player slider {
-    background-color: transparent;
-    min-width: 1px;
-    min-height: 1px;
-    box-shadow: none;
-    transition-property: all;
-    transition-duration: 300ms; }
-    #mpris-player slider:hover {
-      background-color: #b4befe; }

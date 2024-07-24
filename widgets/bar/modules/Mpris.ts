@@ -25,7 +25,7 @@ const Player = ({
     class_name: "player-icon",
     on_primary_click: () =>
       (floatingMediaPlayer.value = floatingMediaPlayer.value ? false : true),
-    child: Widget.Button({
+    child: Widget.Label({
       class_name: "player-icon-label",
       label: playerIcons(name),
     }),
@@ -59,7 +59,7 @@ const Player = ({
 };
 
 export default () =>
-  Widget.Button({
+  Widget.EventBox({
     class_name: "media",
 
     on_primary_click: () =>

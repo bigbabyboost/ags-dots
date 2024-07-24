@@ -28,7 +28,6 @@ export const Player = (player: MprisPlayer) => {
         background-position: center;
         min-height: 100px;
         min-width: 100px;
-        border-radius: 6px;
         margin-right: 14px;
 `,
     ),
@@ -175,7 +174,6 @@ export default () =>
   Widget.Window({
     name: "mpris-player",
     margins: [4],
-    css: "border-radius: 10px;",
     anchor: ["top"],
     visible: floatingMediaPlayer.bind(),
     // visible:

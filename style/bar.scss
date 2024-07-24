@@ -24,6 +24,7 @@ button {
   }
 }
 
+
 progress,
 highlight {
   min-height: 8px;
@@ -55,6 +56,14 @@ highlight {
 .workspaces {
   button {
     padding-right: 12px;
+
+    &:nth-child(1) {
+      padding-left: 0;
+    }
+
+    &:nth-last-child(1) {
+      padding-right: 2px;
+    }
   }
 
   padding-right: 5px;
@@ -64,6 +73,22 @@ highlight {
       font-size: 14px;
       font-weight: 900;
     }
+  }
+}
+
+.media {
+  color: $color09;
+
+  .player-icon-label {
+    padding-right: 6px;
+    font-family: "Cantarel";
+  }
+
+}
+
+.systray {
+  button {
+    all: unset
   }
 }
 
@@ -86,5 +111,5 @@ label {
 .powermenu-icon {
   font-size: 16px;
   color: $color04;
-  padding-right: 5px;
+  padding-right: 6px;
 }
