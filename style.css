@@ -1,0 +1,146 @@
+* {
+  font-family: "CommitMono Nerd Font";
+  font-size: 14px; }
+
+window {
+  background-color: #1e1e1e;
+  color: #181825; }
+
+.bar {
+  padding-left: 10px;
+  padding-right: 10px; }
+
+button {
+  color: white;
+  border: none;
+  box-shadow: none;
+  background: #1e1e1e;
+  min-width: 0; }
+  button:active {
+    color: #b4befe; }
+  button:hover {
+    color: #f9e2af; }
+
+progress,
+highlight {
+  min-height: 8px; }
+
+.distro-icon {
+  font-size: 16px;
+  padding-right: 6px;
+  color: #89b4fa; }
+
+.separator {
+  color: #585b70; }
+
+.cpu-usage {
+  color: #89dceb; }
+
+.memory-usage {
+  color: #cba6f7; }
+
+.client-title {
+  color: #f9e2af; }
+
+.workspaces {
+  padding-right: 5px; }
+  .workspaces button {
+    padding-right: 12px; }
+  .workspaces .indicator-icons label {
+    font-size: 14px;
+    font-weight: 900; }
+
+.network-indicator {
+  color: #89b4fa; }
+
+.volume-indicator {
+  color: #a6e3a1; }
+
+.clock {
+  color: #fab387; }
+
+label {
+  font-weight: bold; }
+
+.powermenu-icon {
+  font-size: 16px;
+  color: #f38ba8;
+  padding-right: 5px; }
+
+window#notifications {
+  all: unset;
+  background-color: transparent;
+  font-size: 14px; }
+  window#notifications .notifications {
+    margin: 4.8px; }
+    window#notifications .notifications .notification {
+      background-color: #1e1e1e;
+      padding: 10px;
+      border: 3px solid #b4befe;
+      border-radius: 6px;
+      margin-bottom: 6px; }
+      window#notifications .notifications .notification .title {
+        font-family: "Cantarell"; }
+      window#notifications .notifications .notification .description {
+        font-family: "Cantarell";
+        font-size: 14px;
+        font-weight: 400;
+        margin-top: 2px; }
+      window#notifications .notifications .notification .icon {
+        color: #181825; }
+        window#notifications .notifications .notification .icon.img {
+          margin-right: 10px; }
+      window#notifications .notifications .notification .time {
+        background-color: #a6e3a1;
+        color: #1e1e1e;
+        padding: 0 10px;
+        margin-right: 10px;
+        border-radius: 10rem; }
+      window#notifications .notifications .notification .close-button {
+        background-color: #f38ba8;
+        color: #1e1e1e; }
+        window#notifications .notifications .notification .close-button:hover {
+          background-color: #b4befe;
+          color: #181825; }
+
+#osd {
+  background-color: transparent; }
+  #osd box {
+    min-width: 40px;
+    min-height: 14rem;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    padding: 14px 2px 0px 2px;
+    margin-right: 20px;
+    border: 2px solid #b4befe; }
+  #osd .osd-icon {
+    font-size: 20px; }
+  #osd trough {
+    border-radius: 6px;
+    margin-top: 14px;
+    margin-bottom: 10px; }
+    #osd trough progress,
+    #osd trough highlight {
+      min-width: 30px;
+      border-radius: 6px; }
+
+#mpris-player {
+  background-color: #181825;
+  border: 2px solid #b4befe; }
+  #mpris-player .player-control-icons {
+    padding-right: 4px; }
+    #mpris-player .player-control-icons label {
+      font-size: 20px; }
+  #mpris-player trough highlight,
+  #mpris-player trough progress {
+    background-color: #b4befe;
+    min-height: 6px; }
+  #mpris-player slider {
+    background-color: transparent;
+    min-width: 1px;
+    min-height: 1px;
+    box-shadow: none;
+    transition-property: all;
+    transition-duration: 300ms; }
+    #mpris-player slider:hover {
+      background-color: #b4befe; }
