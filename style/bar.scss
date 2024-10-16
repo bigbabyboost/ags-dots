@@ -4,11 +4,11 @@ window {
 }
 
 .bar {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 4px 10px;
 }
 
 button {
+  padding: 1px 10px;
   color: white;
   border: none;
   box-shadow: none;
@@ -37,25 +37,36 @@ highlight {
 }
 
 .separator {
-  color: #585b70;
+  color: $color01;
+  opacity: 0.4;
 }
 
-.cpu-usage {
+.cpu-usage,
+.memory-usage,
+.client-title,
+.volume-indicator,
+.clock {
+  .value {
+    color: $color01;
+  }
+}
+
+.cpu-usage .icon {
   color: $color11;
 }
 
-.memory-usage {
+.memory-usage .icon {
   color: $color10;
 }
 
-.client-title {
+.client-title .icon {
   color: $color07;
 }
 
 
 .workspaces {
   button {
-    padding-right: 12px;
+    padding-right: 10px;
 
     &:nth-child(1) {
       padding-left: 0;
@@ -77,13 +88,26 @@ highlight {
 }
 
 .media {
-  color: $color09;
+  color: $color01;
 
-  .player-icon-label {
-    padding-right: 6px;
-    font-family: "Cantarel";
+  .player-icon {
+    background: $color00;
+    color: $color09;
+
+    &:hover {
+      background: $color03;
+      color: $color00;
+    }
   }
 
+  .paused {
+    font-style: italic;
+    color: $color07;
+  }
+
+  .status-icon {
+    color: $color01;
+  }
 }
 
 .systray {
@@ -96,11 +120,11 @@ highlight {
   color: $color03;
 }
 
-.volume-indicator {
+.volume-indicator .icon {
   color: $color05;
 }
 
-.clock {
+.clock .icon {
   color: $color06;
 }
 

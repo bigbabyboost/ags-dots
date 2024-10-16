@@ -1,11 +1,11 @@
-import { floatingMediaPlayer } from "utils.ts";
 import { playerIcons } from "lib/icons";
+import { floatingMediaPlayer } from "utils.ts";
 
 const mpris = await Service.import("mpris");
 
 function statusIcon(status: "Playing" | "Paused" | "Stopped") {
-  if (status === "Playing") return "󰏤";
-  else return "";
+  if (status === "Playing") return " ";
+  return " ";
 }
 
 interface PlayerProps {
@@ -21,13 +21,13 @@ const Player = ({
   track_title,
   play_back_status,
 }: PlayerProps) => {
-  const icon = Widget.EventBox({
+  const icon = Widget.Button({
     class_name: "player-icon",
-    on_primary_click: () =>
-      (floatingMediaPlayer.value = floatingMediaPlayer.value ? false : true),
+    on_primary_click: () => {
+      floatingMediaPlayer.value = !floatingMediaPlayer.value;
+    },
     child: Widget.Label({
-      class_name: "player-icon-label",
-      label: playerIcons(name),
+      label: playerIcons("default"),
     }),
   });
 
@@ -44,7 +44,7 @@ const Player = ({
     max_width_chars: 24,
     truncate: "end",
     wrap: true,
-    label: track_artists.join(", ") + " -",
+    label: `${track_artists.join(", ")} -`,
   });
 
   const status = Widget.Label({
@@ -59,30 +59,38 @@ const Player = ({
 };
 
 export default () =>
-  Widget.EventBox({
+  Widget.Box({
     class_name: "media",
+    child: Widget.EventBox({
+      setup: (self) =>
+        self.hook(mpris, (self) => {
+          const player =
+            mpris.getPlayer("spotify") || mpris.getPlayer() || null;
 
-    on_primary_click: () =>
-      (floatingMediaPlayer.value = floatingMediaPlayer.value ? false : true),
-    setup: (self) =>
-      self.hook(mpris, (self) => {
-        const player = mpris.getPlayer("spotify") || mpris.getPlayer() || null;
-        if (!player) {
-          return;
-        }
+          if (!player) {
+            return;
+          }
 
-        const { name, track_artists, track_title, play_back_status } = player;
-        if (play_back_status !== "Stopped") {
-          self.child = Player({
-            name: name,
-            track_artists: track_artists,
-            track_title: track_title,
-            play_back_status: play_back_status,
-          });
-        } else {
-          self.child = Widget.Label({
-            label: "",
-          });
-        }
-      }),
+          // Player controls
+          self.on_primary_click = player.playPause;
+          self.on_scroll_down = player.next;
+          self.on_scroll_up = player.previous;
+
+          self.class_name = player.play_back_status.toLowerCase();
+
+          const { name, track_artists, track_title, play_back_status } = player;
+          if (play_back_status !== "Stopped") {
+            self.child = Player({
+              name: name,
+              track_artists: track_artists,
+              track_title: track_title,
+              play_back_status: play_back_status,
+            });
+          } else {
+            self.child = Widget.Label({
+              label: "",
+            });
+          }
+        }),
+    }),
   });

@@ -1,11 +1,13 @@
-const Mpris = await Service.import("mpris");
-import { type MprisPlayer } from "types/service/mpris";
 import { playerIcons } from "lib/icons";
-const players = Mpris.bind("players");
+import { isFileExists } from "lib/utils";
+import type { MprisPlayer } from "types/service/mpris";
 import { floatingMediaPlayer } from "utils.ts";
 
+const Mpris = await Service.import("mpris");
+const players = Mpris.bind("players");
+
 const FALLBACK_ICON = " 󰎈 ";
-const PLAY_ICON = "  ";
+const PLAY_ICON = " 󰐊 ";
 const PAUSE_ICON = " 󰏤 ";
 const PREV_ICON = "󰒮";
 const NEXT_ICON = "󰒭";
@@ -18,19 +20,24 @@ function lengthStr(length: number) {
 }
 
 export const Player = (player: MprisPlayer) => {
-  const albumArt = Widget.Box({
-    css: Utils.merge(
-      [player.bind("cover_path"), player.bind("track_cover_url")],
-      (path, url) => `
-        background-image: url("${path || url}");
+  const albumArt = Widget.Box().hook(player, (self) => {
+    const { track_cover_url, cover_path } = player;
+
+    const url = track_cover_url || cover_path;
+
+    if (isFileExists(url)) {
+      self.css = `
+        background-image: url("${url}");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
         min-height: 100px;
         min-width: 100px;
         margin-right: 14px;
-`,
-    ),
+      `;
+    } else {
+      self.css = "min-height: 100px;";
+    }
   });
 
   const title = Widget.Label({
@@ -54,7 +61,9 @@ export const Player = (player: MprisPlayer) => {
   const playerProgress = Widget.Slider({
     class_name: "player-progress",
     draw_value: false,
-    on_change: ({ value }) => (player.position = value * player.length),
+    on_change: ({ value }) => {
+      player.position = value * player.length;
+    },
     css: `
         padding: 0;
     `,
@@ -176,8 +185,6 @@ export default () =>
     margins: [4],
     anchor: ["top"],
     visible: floatingMediaPlayer.bind(),
-    // visible:
-    //   floatingMediaPlayer.bind() === true && players.as((p) => p.length > 0),
     child: Widget.EventBox({
       on_scroll_up: () => playerChange("prev"),
       on_scroll_down: () => playerChange("next"),

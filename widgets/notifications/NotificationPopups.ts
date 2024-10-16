@@ -3,7 +3,7 @@ import Notification from "./Notification";
 export const notifications = await Service.import("notifications");
 const popups = notifications.bind("popups");
 
-notifications.popupTimeout = 5000;
+notifications.popupTimeout = 500000;
 
 export default () =>
   Widget.Window({

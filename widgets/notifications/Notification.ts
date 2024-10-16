@@ -1,9 +1,10 @@
 import GLib from "gi://GLib";
+import type { Notification } from "types/service/notifications";
 
 const time = (time: number, format = "%H:%M") =>
   GLib.DateTime.new_from_unix_local(time).format(format);
 
-export const NotificationIcon = ({ app_entry, app_icon, image }) => {
+export const NotificationIcon = ({ image }) => {
   if (image) {
     return Widget.Box({
       vpack: "start",
@@ -14,49 +15,32 @@ export const NotificationIcon = ({ app_entry, app_icon, image }) => {
           background-size: contain;
           background-repeat: no-repeat;
           background-position: center;
-          min-height: 100px;
-          min-width: 100px;
-          border-radius: 6px;
-          padding-right: 4px;
+          min-height: 80px;
+          min-width: 80px;
       `,
     });
   }
-  let icon = "dialof-information-symbolic";
-  if (Utils.lookUpIcon(app_icon)) icon = app_icon;
-  if (app_entry && Utils.lookUpIcon(app_entry || "")) icon = app_entry || "";
-
-  return Widget.Box({
-    vpack: "start",
-    hexpand: false,
-    class_name: "icon",
-    css: "min-height: 78px;min-width:78px",
-    child: Widget.Icon({
-      icon,
-      size: 58,
-      hpack: "center",
-      vpack: "center",
-      vexpand: true,
-    }),
-  });
+  return Widget.Box();
 };
 
-export default (n) => {
+export default (noti: Notification) => {
   const icon = Widget.Box({
     vpack: "start",
     class_name: "icon",
-    child: NotificationIcon(n),
+    child: NotificationIcon(noti),
   });
 
   // Title
   const title = Widget.Label({
     class_name: "title",
+    css: "margin-right: 20px;",
     xalign: 0,
     justification: "left",
     hexpand: true,
     max_width_chars: 24,
     truncate: "end",
     wrap: true,
-    label: n.summary.trim(),
+    label: noti.summary.trim(),
     use_markup: true,
   });
 
@@ -67,7 +51,7 @@ export default (n) => {
     use_markup: true,
     xalign: 0,
     justification: "left",
-    label: n.body.trim(),
+    label: noti.body.trim(),
     max_width_chars: 28,
     wrap: true,
   });
@@ -75,38 +59,36 @@ export default (n) => {
   const clock = Widget.Label({
     class_name: "time",
     vpack: "start",
-    label: time(n.time),
+    label: time(noti.time),
   });
 
-  // Close Button
-  const closeButton = Widget.Button({
-    class_name: "close-button",
-    vpack: "start",
-    css: `
-    min-width: 6px;
-    min-height: 6px;
-    border-radius: 10rem;
-    `,
-    child: Widget.Icon("window-close-symbolic"),
-    on_clicked: n.close,
+  const appname = Widget.Label({
+    class_name: "app-name",
+    xalign: 1,
+    justification: "left",
+    label: noti.app_name,
   });
 
   // Main Window
-  return Widget.Box({
-    class_name: `notification ${n.urgency}`,
-    css: "min-width: 25rem;",
-    children: [
-      icon,
-      Widget.Box({
-        hexpand: true,
-        vertical: true,
-        children: [
-          Widget.Box({
-            children: [title, clock, closeButton],
-          }),
-          description,
-        ],
-      }),
-    ],
+  return Widget.EventBox({
+    on_primary_click: noti.close,
+    child: Widget.Box({
+      css: "min-width: 25rem;",
+      class_name: `notification ${noti.urgency}`,
+      children: [
+        icon,
+        Widget.Box({
+          hexpand: true,
+          vertical: true,
+          children: [
+            Widget.Box({
+              children: [title, clock],
+            }),
+            description,
+            appname,
+          ],
+        }),
+      ],
+    }),
   });
 };

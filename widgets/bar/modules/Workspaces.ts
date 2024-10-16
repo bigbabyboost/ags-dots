@@ -18,7 +18,7 @@ export default () =>
       // remove this setup hook if you want fixed number of buttons
       setup: (self) =>
         self.hook(hyprland, () =>
-          self.children.forEach((btn) => {
+          self.children.forEach((btn, _) => {
             btn.label =
               hyprland.active.workspace.id === btn.attribute ? "" : "";
             btn.class_name = "indicator-icons";
