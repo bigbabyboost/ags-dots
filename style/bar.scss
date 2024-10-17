@@ -7,6 +7,15 @@ window {
   padding: 4px 10px;
 }
 
+.motherfucker {
+  all: unset;
+  margin: 9px 0;
+  min-width: 24px;
+  // min-height: 2px;
+  background: white;
+  border-radius: 10px;
+}
+
 button {
   padding: 1px 10px;
   color: white;
@@ -38,11 +47,12 @@ highlight {
 
 .separator {
   color: $color01;
-  opacity: 0.4;
+  opacity: 0.2;
 }
 
 .cpu-usage,
 .memory-usage,
+.flatpak-updates,
 .client-title,
 .volume-indicator,
 .clock {
@@ -63,29 +73,43 @@ highlight {
   color: $color07;
 }
 
+.flatpak-updates .icon {
+  color: $color05;
+}
 
 .workspaces {
+
   button {
-    padding-right: 10px;
+    all: unset;
+    background: $color01;
+    opacity: 0.2;
+    min-width: 14px;
+    margin: 9px 4px;
+    border-radius: 10px;
 
     &:nth-child(1) {
-      padding-left: 0;
+      margin-left: 0;
     }
 
     &:nth-last-child(1) {
-      padding-right: 2px;
+      margin-right: 0;
     }
   }
 
-  padding-right: 5px;
+  .active {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
+    transition-duration: 300ms;
+    min-width: 22px;
+    opacity: 1;
+  }
 
-  .indicator-icons {
-    label {
-      font-size: 14px;
-      font-weight: 900;
-    }
+  .occupied {
+    opacity: 1;
+    background: $color05;
   }
 }
+
 
 .media {
   color: $color01;

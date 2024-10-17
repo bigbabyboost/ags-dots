@@ -11,18 +11,22 @@ export default () =>
       children: Array.from({ length: 5 }, (_, i) => i + 1).map((i) =>
         Widget.Button({
           attribute: i,
+          class_name: "default",
           onClicked: () => dispatch(i),
         }),
       ),
 
-      // remove this setup hook if you want fixed number of buttons
-      setup: (self) =>
+      setup: (self) => {
         self.hook(hyprland, () =>
           self.children.forEach((btn, _) => {
-            btn.label =
-              hyprland.active.workspace.id === btn.attribute ? "" : "";
-            btn.class_name = "indicator-icons";
+            const isActive = hyprland.active.workspace.id === btn.attribute;
+            const isOccupied =
+              (hyprland.getWorkspace(btn.attribute)?.windows || 0) > 0;
+
+            btn.toggleClassName("active", isActive);
+            btn.toggleClassName("occupied", isOccupied && !isActive);
           }),
-        ),
+        );
+      },
     }),
   });
