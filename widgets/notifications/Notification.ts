@@ -73,7 +73,7 @@ export default (noti: Notification) => {
   return Widget.EventBox({
     on_primary_click: noti.close,
     child: Widget.Box({
-      css: "min-width: 25rem;",
+      css: "min-width: 22rem;",
       class_name: `notification ${noti.urgency}`,
       children: [
         icon,
