@@ -121,12 +121,28 @@ export function createSurfaceFromWidget(widget: Gtk.Widget) {
  * @returns boolean
  */
 export function isFileExists(url: string): boolean {
-  const filePath = GLib.filename_from_uri(url)[0];
+  // If the URL is a remote image, basically non local then return true
+  // without checking anything
+  if (url.startsWith("http://") || url.startsWith("https://")) return true;
 
-  const exists = GLib.file_test(
-    filePath,
-    GLib.FileTest.EXISTS | GLib.FileTest.IS_REGULAR,
-  );
+  let fileUri = url as string | null;
 
-  return exists;
+  // If the URL is a file path, convert it to a URI
+  if (!url.startsWith("file://")) {
+    fileUri = GLib.filename_to_uri(url, null);
+  }
+
+  if (!fileUri) return false;
+
+  // Extract the file path from the URI
+  const [filePath, error] = GLib.filename_from_uri(fileUri);
+
+  if (error || !filePath) {
+    return false;
+  }
+
+  const exists = GLib.file_test(filePath, GLib.FileTest.EXISTS);
+  const isRegular = GLib.file_test(filePath, GLib.FileTest.IS_REGULAR);
+
+  return exists && isRegular;
 }
