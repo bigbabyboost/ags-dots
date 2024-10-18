@@ -2,7 +2,7 @@ import Fallback from "./Fallback";
 import Header from "./Header";
 import Notifications from "./Notifications";
 
-export const showNotificationCenter = Variable(true);
+export const showNotificationCenter = Variable(false);
 export const notifications = await Service.import("notifications");
 
 export const NotificationCenter = () =>
