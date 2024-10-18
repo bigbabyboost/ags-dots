@@ -26,3 +26,14 @@ export const playerIcons = (name: string) => {
       return "󰎈";
   }
 };
+
+export default {
+  notification: {
+    default: "notifications-symbolic",
+    disabled: "notifications-disabled-symbolic",
+  },
+  trash: {
+    full: "user-trash-full-symbolic",
+    empty: "user-trash-symbolic",
+  },
+};

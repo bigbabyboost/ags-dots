@@ -58,10 +58,6 @@ export default () =>
                 },
               }),
               Widget.Button().hook(showScreenthotOpts, (self) => {
-                self.on_hover = () => {
-                  showScreenthotOpts.value = true;
-                };
-
                 self.on_primary_click = () => {
                   showScreenthotOpts.value = !showScreenthotOpts.value;
                 };

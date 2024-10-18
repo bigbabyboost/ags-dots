@@ -9,13 +9,16 @@ export default () =>
   Widget.Window({
     name: "notifications",
     anchor: ["top", "right"],
+    layer: "overlay",
     child: Widget.Box({
       css: "padding: 0.1px;",
       child: Widget.Box({
         class_name: "notifications",
         vertical: true,
         vexpand: false,
-        children: popups.as((popups) => popups.map(Notification)),
+        children: popups.as((popups) =>
+          popups.map((noti) => Notification(noti)),
+        ),
       }),
     }),
   });

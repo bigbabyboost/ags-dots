@@ -24,7 +24,7 @@ export const Player = (player: MprisPlayer) => {
     const { track_cover_url, cover_path } = player;
 
     const url = track_cover_url || cover_path;
-    const image = isFileExists(url)
+    const image = isFileExists(track_cover_url)
       ? url
       : "https://ik.imagekit.io/rayshold/gallery/mpris-fallback.webp";
 

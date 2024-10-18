@@ -9,6 +9,8 @@ import { CpuUsage, MemoryUsage } from "./modules/SysMonitor.ts";
 import { NetworkIndicator } from "./modules/Network.ts";
 import PowermenuIcon from "./modules/PowermenuIcon.ts";
 import Mpris from "./modules/Mpris.ts";
+import FlatpakUpdates from "./modules/FlatpakUpdates";
+import NotifyIcon from "./modules/NotifyIcon";
 
 // Bar layouts
 const Left = () =>
@@ -22,6 +24,7 @@ const Left = () =>
       CpuUsage(),
       Separator(),
       MemoryUsage(),
+      FlatpakUpdates(),
       ClientTitle(),
     ],
   });
@@ -44,7 +47,8 @@ const Right = () =>
       Separator(),
       Clock(),
       Separator(),
-      PowermenuIcon,
+      NotifyIcon(),
+      // PowermenuIcon,
     ],
   });
 

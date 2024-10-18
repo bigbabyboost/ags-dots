@@ -1,3 +1,5 @@
+@import "./mixines/transition.scss";
+
 window {
   background-color: $base;
   color: $color00;
@@ -11,7 +13,6 @@ window {
   all: unset;
   margin: 9px 0;
   min-width: 24px;
-  // min-height: 2px;
   background: white;
   border-radius: 10px;
 }
@@ -40,10 +41,8 @@ highlight {
 }
 
 .distro-icon {
+  @include transition-color;
   color: $color03;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
 
   label {
     font-size: 16px;
@@ -107,9 +106,7 @@ highlight {
   }
 
   .active {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.25, 1, 0.5, 1);
-    transition-duration: 300ms;
+    @include transition-color;
     min-width: 22px;
     opacity: 1;
   }
@@ -170,4 +167,21 @@ label {
   font-size: 16px;
   color: $color04;
   padding-right: 6px;
+}
+
+.notify-icon {
+  @include transition-color;
+  color: $color05;
+
+  &:hover {
+    color: $color01;
+  }
+
+  image {
+    font-size: 15;
+  }
+
+  .has-notifications {
+    color: $color04;
+  }
 }

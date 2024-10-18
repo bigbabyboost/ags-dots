@@ -3,12 +3,13 @@ import SysFetch from "./SysFetch";
 import ButtonsGrid from "./ButtonsGrid";
 
 const mpris = await Service.import("mpris");
-export const showQuickSettings = Variable(true);
+export const showQuickSettings = Variable(false);
 
 const ControlPannel = () => {
   return Widget.Box({
     spacing: 10,
-    css: "margin: 10px 10px;",
+    class_name: "control-pannel",
+    css: "margin: 6px 6px;",
     vpack: "start",
     vertical: true,
     children: [
@@ -32,7 +33,7 @@ export default () =>
     visible: showQuickSettings.bind(),
     name: "quicksettings",
     anchor: ["left", "top", "bottom"],
-    css: "border-top: 1px solid rgba(255, 255, 255, 0.1);",
+    css: "background: transparent;",
     layer: "overlay",
     child: ControlPannel(),
   });

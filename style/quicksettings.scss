@@ -1,6 +1,9 @@
 #quicksettings {
-  $border: 2px solid $color00;
-  $bg-alt: rgba($color00, 0.4);
+  .control-pannel {
+    background: $base;
+    border: 3px solid $color03;
+    padding: 10px;
+  }
 
   .mpris {
     background: $bg-alt;
