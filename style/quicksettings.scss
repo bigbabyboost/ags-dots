@@ -1,0 +1,79 @@
+#quicksettings {
+  $border: 2px solid $color00;
+  $bg-alt: rgba($color00, 0.4);
+
+  .mpris {
+    background: $bg-alt;
+    border: $border;
+    border-radius: 4px;
+
+    trough {
+      background-color: rgba($color01, 0.1);
+    }
+
+    label {
+      color: $color01;
+    }
+  }
+
+  .buttons-grid {
+    .container {
+      background-color: $bg-alt;
+      border: $border;
+      padding: 10px;
+    }
+
+    button {
+      background-color: $color00;
+      min-height: 38px;
+      min-width: 8.3rem;
+      border-radius: 6px;
+
+      &:hover {
+        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+        background-color: $color05;
+        color: $color00;
+      }
+    }
+
+    .active {
+      background-color: $color03;
+      color: $color00;
+    }
+  }
+
+  .sysfetch {
+    background: $bg-alt;
+    border: $border;
+    border-radius: 4px;
+    padding: 8px;
+
+    color: $color01;
+
+    .icon {
+      padding-right: 2px;
+    }
+
+    .user .icon {
+      color: $color07;
+    }
+
+    .host .icon {
+      color: $color06;
+    }
+
+    .distro .icon {
+      color: $color05;
+    }
+
+    .kernel .icon {
+      color: $color11;
+    }
+
+    .uptime .icon {
+      color: $color10;
+    }
+  }
+}

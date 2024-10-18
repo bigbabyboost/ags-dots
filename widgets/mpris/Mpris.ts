@@ -24,20 +24,20 @@ export const Player = (player: MprisPlayer) => {
     const { track_cover_url, cover_path } = player;
 
     const url = track_cover_url || cover_path;
+    const image = isFileExists(url)
+      ? url
+      : "https://ik.imagekit.io/rayshold/gallery/mpris-fallback.webp";
 
-    if (isFileExists(url)) {
-      self.css = `
-        background-image: url("${url}");
+    self.css = `
+        background-image: url("${image}");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        min-height: 100px;
-        min-width: 100px;
+        min-height: 110px;
+        min-width: 110px;
         margin-right: 14px;
+        border: 4px solid rgba(255, 255, 255, .8);
       `;
-    } else {
-      self.css = "min-height: 100px;";
-    }
   });
 
   const title = Widget.Label({
@@ -139,8 +139,9 @@ export const Player = (player: MprisPlayer) => {
 
   return Widget.Box({
     hexpand: true,
+    name: "mpris-player",
     css: `
-        min-width: 24rem;
+        min-width: 20rem;
         padding: 6px;
       `,
     children: [
@@ -181,7 +182,7 @@ const playerChange = (nav: "prev" | "next") => {
 
 export default () =>
   Widget.Window({
-    name: "mpris-player",
+    name: "mpris-palyer-window",
     margins: [4],
     anchor: ["top"],
     visible: floatingMediaPlayer.bind(),

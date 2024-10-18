@@ -1,7 +1,11 @@
+import { showQuickSettings } from "widgets/quicksettings/QuickSettings";
+
 export default Widget.EventBox({
-  onPrimaryClick: () => Utils.exec("kitty -e --hold neofetch"),
+  class_name: "distro-icon",
+  onPrimaryClick: () => {
+    showQuickSettings.value = !showQuickSettings.value;
+  },
   child: Widget.Label({
-    class_name: "distro-icon",
     label: "",
   }),
 });

@@ -40,9 +40,19 @@ highlight {
 }
 
 .distro-icon {
-  font-size: 16px;
-  padding-right: 6px;
   color: $color03;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+
+  label {
+    font-size: 16px;
+    padding-right: 6px;
+  }
+
+  &:hover {
+    color: $color01;
+  }
 }
 
 .separator {

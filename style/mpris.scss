@@ -1,15 +1,10 @@
 #mpris-player {
-
-
   color: $color09;
 
   button {
     all: unset;
     color: $color09;
   }
-
-  background-color: $crust;
-  border: 2px solid $color01;
 
   .player-control-icons {
     padding-right: 4px;
@@ -18,4 +13,9 @@
       font-size: 20px;
     }
   }
+}
+
+#mpris-palyer-window {
+  background-color: $crust;
+  border: 2px solid $color01;
 }
