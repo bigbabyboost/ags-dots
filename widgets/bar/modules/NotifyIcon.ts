@@ -1,4 +1,3 @@
-import { showNotificationCenter } from "widgets/notifications/notification-center/NotificationCenter";
 import icons from "lib/icons";
 
 export const notis = await Service.import("notifications");
@@ -6,9 +5,7 @@ export const notis = await Service.import("notifications");
 export default () =>
   Widget.EventBox({
     class_name: "notify-icon",
-    on_primary_click: () => {
-      showNotificationCenter.value = !showNotificationCenter.value;
-    },
+    on_primary_click: () => App.toggleWindow("notification-center"),
     on_secondary_click: () => {
       notis.dnd = !notis.dnd;
     },

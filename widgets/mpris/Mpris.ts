@@ -1,7 +1,6 @@
 import { playerIcons } from "lib/icons";
 import { isFileExists } from "lib/utils";
 import type { MprisPlayer } from "types/service/mpris";
-import { floatingMediaPlayer } from "utils.ts";
 
 const Mpris = await Service.import("mpris");
 const players = Mpris.bind("players");
@@ -185,7 +184,7 @@ export default () =>
     name: "mpris-palyer-window",
     margins: [4],
     anchor: ["top"],
-    visible: floatingMediaPlayer.bind(),
+    visible: false,
     child: Widget.EventBox({
       on_scroll_up: () => playerChange("prev"),
       on_scroll_down: () => playerChange("next"),

@@ -1,5 +1,4 @@
 import { playerIcons } from "lib/icons";
-import { floatingMediaPlayer } from "utils.ts";
 
 const mpris = await Service.import("mpris");
 
@@ -23,9 +22,7 @@ const Player = ({
 }: PlayerProps) => {
   const icon = Widget.Button({
     class_name: "player-icon",
-    on_primary_click: () => {
-      floatingMediaPlayer.value = !floatingMediaPlayer.value;
-    },
+    on_primary_click: () => App.toggleWindow("mpris-palyer-window"),
     child: Widget.Label({
       label: playerIcons("default"),
     }),

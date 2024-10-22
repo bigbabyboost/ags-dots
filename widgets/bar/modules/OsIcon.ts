@@ -1,10 +1,6 @@
-import { showQuickSettings } from "widgets/quicksettings/QuickSettings";
-
 export default Widget.EventBox({
   class_name: "distro-icon",
-  onPrimaryClick: () => {
-    showQuickSettings.value = !showQuickSettings.value;
-  },
+  onPrimaryClick: () => App.toggleWindow("quicksettings"),
   child: Widget.Label({
     label: "",
   }),

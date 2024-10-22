@@ -2,12 +2,10 @@ import Fallback from "./Fallback";
 import Header from "./Header";
 import Notifications from "./Notifications";
 
-export const showNotificationCenter = Variable(false);
 export const notifications = await Service.import("notifications");
 
 export const NotificationCenter = () =>
   Widget.Box({
-    name: "notification-center",
     css: "min-width: 20rem; padding: 8px;",
     vertical: true,
     spacing: 8,
@@ -20,7 +18,8 @@ export const NotificationCenter = () =>
 
 export default () =>
   Widget.Window({
-    visible: showNotificationCenter.bind(),
+    name: "notification-center",
+    visible: false,
     margins: [6, 6],
     anchor: ["right", "top"],
     child: NotificationCenter(),
