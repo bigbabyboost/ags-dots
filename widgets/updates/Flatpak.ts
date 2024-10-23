@@ -97,11 +97,10 @@ const UpdatesPopup = () =>
   Widget.Box({
     css: "min-width:28rem; min-height: 16rem; padding: 8px;",
     children: [
-      Widget.Box({ children: [Fallback] }).hook(flatpakUpdates, (self) => {
+      Widget.Box({}).hook(flatpakUpdates, (self) => {
         if (flatpakUpdates.value.length > 0) {
-          self.remove(Fallback);
-          self.add(Updates);
-        }
+          self.children = [Updates];
+        } else self.children = [Fallback];
       }),
     ],
   });
@@ -109,7 +108,7 @@ const UpdatesPopup = () =>
 export default () =>
   Widget.Window({
     name: WINDOW_NAME,
-    visible: false,
+    // visible: false,
     anchor: ["left", "top"],
     margins: [6, 360],
     child: UpdatesPopup(),
