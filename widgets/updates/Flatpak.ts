@@ -4,6 +4,7 @@ import {
   flatpakUpdates,
   refetchFlatpakUpdates,
 } from "module-vars/updates/flatpak";
+import { Fallback } from "custom-widgets/Fallback";
 
 const WINDOW_NAME = "flatpak-updates";
 
@@ -79,20 +80,6 @@ const Updates = Widget.Box({
   children: [UpdateList(), UpdateAll],
 });
 
-const Fallback = Widget.CenterBox({
-  class_name: "fallback",
-  vertical: true,
-  hexpand: true,
-  centerWidget: Widget.Box({
-    vertical: true,
-    spacing: 10,
-    children: [
-      Widget.Label({ label: "🎊", css: "font-size: 42;" }),
-      Widget.Label({ label: "All apps are updated :)" }),
-    ],
-  }),
-});
-
 const UpdatesPopup = () =>
   Widget.Box({
     css: "min-width:28rem; min-height: 16rem; padding: 8px;",
@@ -100,7 +87,14 @@ const UpdatesPopup = () =>
       Widget.Box({}).hook(flatpakUpdates, (self) => {
         if (flatpakUpdates.value.length > 0) {
           self.children = [Updates];
-        } else self.children = [Fallback];
+        } else
+          self.children = [
+            Fallback({
+              iconType: "label",
+              icon: "🎊",
+              label: "All apps are updated :)",
+            }),
+          ];
       }),
     ],
   });
@@ -108,7 +102,7 @@ const UpdatesPopup = () =>
 export default () =>
   Widget.Window({
     name: WINDOW_NAME,
-    // visible: false,
+    visible: false,
     anchor: ["left", "top"],
     margins: [6, 360],
     child: UpdatesPopup(),

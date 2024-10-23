@@ -6,10 +6,9 @@ export default (notifications: Notifications) =>
     hscroll: "never",
     vscroll: "always",
     class_name: "notifications-scrollable",
-    css: "min-height: 30rem;",
+    vexpand: true,
     child: Widget.Box({
       vertical: true,
-      css: "min-height: 30rem; ",
       children: notifications
         .bind("notifications")
         .as((value) =>
