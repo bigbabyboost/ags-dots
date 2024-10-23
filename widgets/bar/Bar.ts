@@ -7,10 +7,9 @@ import Volume from "./modules/Volume.ts";
 import Workspaces from "./modules/Workspaces.ts";
 import { CpuUsage, MemoryUsage } from "./modules/SysMonitor.ts";
 import { NetworkIndicator } from "./modules/Network.ts";
-import PowermenuIcon from "./modules/PowermenuIcon.ts";
 import Mpris from "./modules/Mpris.ts";
-import FlatpakUpdates from "./modules/FlatpakUpdates";
 import NotifyIcon from "./modules/NotifyIcon";
+import FlatpakUpdatesCount from "./modules/FlatpakUpdatesCount";
 
 // Bar layouts
 const Left = () =>
@@ -24,7 +23,7 @@ const Left = () =>
       CpuUsage(),
       Separator(),
       MemoryUsage(),
-      FlatpakUpdates(),
+      FlatpakUpdatesCount(),
       ClientTitle(),
     ],
   });

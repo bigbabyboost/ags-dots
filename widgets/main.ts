@@ -4,6 +4,7 @@ import NotificationPopups from "./notifications/NotificationPopups.ts";
 import OSD from "./osd/OSD.ts";
 import NotificationCenter from "./notifications/notification-center/NotificationCenter";
 import QuickSettings from "./quicksettings/QuickSettings";
+import Flatpak from "./updates/Flatpak";
 
 export default {
   windows: [
@@ -13,5 +14,6 @@ export default {
     Mpris(),
     QuickSettings(),
     NotificationCenter(),
+    Flatpak(),
   ],
 };

@@ -1,0 +1,48 @@
+@import "./mixines/button.scss";
+
+#flatpak-updates {
+  background-color: $base;
+  border: $border;
+  border-color: $color03;
+  border-radius: $border-radius;
+
+  .update-list {
+    background-color: $bg-alt;
+    padding: 4px;
+    border: $border;
+    border-radius: $border-radius;
+  }
+
+  .fallback {
+    color: $text-dimmed;
+  }
+
+  .update-item {
+    background: inherit;
+    padding: 4px 12px;
+    color: $text-dimmed;
+
+    .download-icon {
+      color: $color06;
+    }
+
+    &:hover {
+      background-color: $color00;
+
+      .download-icon {
+        color: $color05;
+      }
+    }
+
+  }
+
+  .name {
+    color: $color01;
+  }
+
+  .update-all {
+    button {
+      @include button;
+    }
+  }
+}

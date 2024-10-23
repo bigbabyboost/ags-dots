@@ -9,14 +9,6 @@ window {
   padding: 4px 10px;
 }
 
-.motherfucker {
-  all: unset;
-  margin: 9px 0;
-  min-width: 24px;
-  background: white;
-  border-radius: 10px;
-}
-
 button {
   padding: 1px 10px;
   color: white;
@@ -61,7 +53,7 @@ highlight {
 
 .cpu-usage,
 .memory-usage,
-.flatpak-updates,
+.flatpak-updates-count,
 .client-title,
 .volume-indicator,
 .clock {
@@ -82,7 +74,7 @@ highlight {
   color: $color07;
 }
 
-.flatpak-updates .icon {
+.flatpak-updates-count .icon {
   color: $color05;
 }
 
