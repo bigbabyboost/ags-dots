@@ -1,4 +1,5 @@
 import { bash } from "lib/utils";
+import { nightlight } from "./nightlight";
 
 const showScreenthotOpts = Variable(false);
 
@@ -47,16 +48,10 @@ export default () =>
             children: [
               Widget.Button({
                 label: "  Nightlight",
-                setup: (self) => {
-                  const isActive = Utils.exec("pgrep wlsunset") !== "";
-                  self.toggleClassName("active", isActive);
-
-                  if (!isActive) {
-                    self.on_primary_click = () =>
-                      bash("wlsunset -t 3200 -T 3201");
-                  }
-                },
-              }),
+                on_primary_click: () => nightlight.toggle(),
+              }).hook(nightlight.service, (self) =>
+                self.toggleClassName("active", nightlight.service.value),
+              ),
               Widget.Button().hook(showScreenthotOpts, (self) => {
                 self.on_primary_click = () => {
                   showScreenthotOpts.value = !showScreenthotOpts.value;
@@ -66,7 +61,7 @@ export default () =>
                   self.label = "";
                   return;
                 }
-                self.label = "  Screenshot";
+                self.label = "  Screenshot";
               }),
             ],
           }),
@@ -79,8 +74,9 @@ export default () =>
                 label: "  Pick Color",
               }),
               Widget.Button({
-                on_primary_click: () => bash(""),
-                label: "󱘐  Random Wall",
+                on_primary_click: () =>
+                  Utils.exec("bash -c '$HOME/.config/ags/scripts/randwall.sh'"),
+                label: "  Random Wall",
               }),
             ],
           }),
