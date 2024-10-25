@@ -13,6 +13,9 @@ export const substitutes = {
 } as const;
 
 export default {
+  ui: {
+    colorpicker: "color-select-symbolic",
+  },
   notification: {
     default: "notifications-symbolic",
     disabled: "notifications-disabled-symbolic",
@@ -45,5 +48,9 @@ export default {
       tauon: "com.github.taiko2k.tauonmb",
       default: "sh.cider.Cider-symbolic",
     },
+  },
+  color: {
+    dark: "dark-mode-symbolic",
+    light: "light-mode-symbolic",
   },
 };

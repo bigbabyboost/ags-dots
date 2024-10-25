@@ -1,5 +1,7 @@
 import { bash } from "lib/utils";
 import { nightlight } from "./nightlight";
+import { CustomButton } from "custom-widgets/CustomButton";
+import icons from "lib/icons";
 
 const showScreenthotOpts = Variable(false);
 
@@ -9,19 +11,25 @@ const ScreenshotOptions = () =>
     child: Widget.Box({
       spacing: 10,
       children: [
-        Widget.Button({
+        CustomButton({
+          hexpand: true,
           on_primary_click: () => {
             bash("hyprshot -m window");
             showScreenthotOpts.value = false;
           },
-          label: "󱂬  Window",
+          icon: "󱂬",
+          iconType: "text",
+          label: "Window",
         }),
-        Widget.Button({
+        CustomButton({
+          icon: "󰒉",
+          iconType: "text",
+          label: "Region",
+          hexpand: true,
           on_primary_click: () => {
             bash("hyprshot -m region");
             showScreenthotOpts.value = false;
           },
-          label: "󰒉  Region",
         }),
       ],
     }),
@@ -46,13 +54,17 @@ export default () =>
           Widget.Box({
             spacing: 10,
             children: [
-              Widget.Button({
-                label: "  Nightlight",
+              CustomButton({
+                icon: icons.color.dark,
+                label: "Nightlight",
+                hexpand: true,
                 on_primary_click: () => nightlight.toggle(),
               }).hook(nightlight.service, (self) =>
                 self.toggleClassName("active", nightlight.service.value),
               ),
-              Widget.Button().hook(showScreenthotOpts, (self) => {
+              Widget.Button({
+                hexpand: true,
+              }).hook(showScreenthotOpts, (self) => {
                 self.on_primary_click = () => {
                   showScreenthotOpts.value = !showScreenthotOpts.value;
                 };
@@ -61,7 +73,15 @@ export default () =>
                   self.label = "";
                   return;
                 }
-                self.label = "  Screenshot";
+                self.child = Widget.Box({
+                  spacing: 10,
+                  children: [
+                    Widget.Separator({ hexpand: true }),
+                    Widget.Label({ label: "" }),
+                    Widget.Label({ label: "Screenshot" }),
+                    Widget.Separator({ hexpand: true }),
+                  ],
+                });
               }),
             ],
           }),
@@ -69,14 +89,19 @@ export default () =>
           Widget.Box({
             spacing: 10,
             children: [
-              Widget.Button({
+              CustomButton({
+                hexpand: true,
                 on_primary_click: () => bash("hyprpicker | wl-copy"),
-                label: "  Pick Color",
+                icon: icons.ui.colorpicker,
+                label: "Pick Color",
               }),
-              Widget.Button({
+              CustomButton({
+                hexpand: true,
+                icon: "",
+                iconType: "text",
+                label: "Random Wall",
                 on_primary_click: () =>
                   Utils.exec("bash -c '$HOME/.config/ags/scripts/randwall.sh'"),
-                label: "  Random Wall",
               }),
             ],
           }),
