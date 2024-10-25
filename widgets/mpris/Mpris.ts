@@ -181,10 +181,10 @@ const playerChange = (nav: "prev" | "next") => {
 
 export default () =>
   Widget.Window({
-    name: "mpris-palyer-window",
+    name: "mpris-player-window",
     margins: [4],
     anchor: ["top"],
-    visible: false,
+    // visible: false,
     child: Widget.EventBox({
       on_scroll_up: () => playerChange("prev"),
       on_scroll_down: () => playerChange("next"),
