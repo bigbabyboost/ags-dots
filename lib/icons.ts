@@ -12,21 +12,6 @@ export const substitutes = {
   "com.github.Aylur.ags": "controls-symbolic",
 } as const;
 
-export const playerIcons = (name: string) => {
-  switch (name) {
-    case "spotify":
-      return "";
-    case "Lollypop":
-      return "";
-    case "firefox":
-      return "󰈹";
-    case "chromium":
-      return "";
-    default:
-      return "󰎈";
-  }
-};
-
 export default {
   notification: {
     default: "notifications-symbolic",
@@ -35,5 +20,30 @@ export default {
   trash: {
     full: "user-trash-full-symbolic",
     empty: "user-trash-symbolic",
+  },
+  mpris: {
+    shuffle: {
+      enabled: "media-playlist-shuffle-symbolic",
+      disabled: "media-playlist-consecutive-symbolic",
+    },
+    loop: {
+      none: "media-playlist-repeat-symbolic",
+      track: "media-playlist-repeat-song-symbolic",
+      playlist: "media-playlist-repeat-symbolic",
+    },
+    playing: "media-playback-pause-symbolic",
+    paused: "media-playback-start-symbolic",
+    stopped: "media-playback-start-symbolic",
+    prev: "media-skip-backward-symbolic",
+    next: "media-skip-forward-symbolic",
+    playerIcons: {
+      spotify: "com.spotify.Client",
+      lollypop: "org.gnome.Lollypop",
+      firefox: "org.mozilla.firefox.BaseApp",
+      chromium: "com.google.Chrome",
+      brave: "com.brave.Browser",
+      tauon: "com.github.taiko2k.tauonmb",
+      default: "sh.cider.Cider-symbolic",
+    },
   },
 };

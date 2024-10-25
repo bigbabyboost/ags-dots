@@ -1,4 +1,4 @@
-import { playerIcons } from "lib/icons";
+import icons from "lib/icons";
 
 const mpris = await Service.import("mpris");
 
@@ -24,7 +24,7 @@ const Player = ({
     class_name: "player-icon",
     on_primary_click: () => App.toggleWindow("mpris-player-window"),
     child: Widget.Label({
-      label: playerIcons("default"),
+      label: "󰎇",
     }),
   });
 

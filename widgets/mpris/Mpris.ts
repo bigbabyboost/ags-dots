@@ -1,15 +1,9 @@
-import { playerIcons } from "lib/icons";
+import icons from "lib/icons";
 import { isFileExists } from "lib/utils";
 import type { MprisPlayer } from "types/service/mpris";
 
 const Mpris = await Service.import("mpris");
 const players = Mpris.bind("players");
-
-const FALLBACK_ICON = " 󰎈 ";
-const PLAY_ICON = " 󰐊 ";
-const PAUSE_ICON = " 󰏤 ";
-const PREV_ICON = "󰒮";
-const NEXT_ICON = "󰒭";
 
 function lengthStr(length: number) {
   const min = Math.floor(length / 60);
@@ -19,27 +13,30 @@ function lengthStr(length: number) {
 }
 
 export const Player = (player: MprisPlayer) => {
-  const albumArt = Widget.Box().hook(player, (self) => {
-    const { track_cover_url, cover_path } = player;
+  const albumArt = Widget.Box({ class_name: "album-art" }).hook(
+    player,
+    (self) => {
+      const { track_cover_url, cover_path } = player;
 
-    const url = track_cover_url || cover_path;
-    const image = isFileExists(track_cover_url)
-      ? url
-      : "https://ik.imagekit.io/rayshold/gallery/mpris-fallback.webp";
+      const url = track_cover_url || cover_path;
+      const image = isFileExists(track_cover_url)
+        ? url
+        : "https://ik.imagekit.io/rayshold/gallery/mpris-fallback.webp";
 
-    self.css = `
+      self.css = `
         background-image: url("${image}");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        min-height: 110px;
-        min-width: 110px;
-        margin-right: 14px;
-        border: 4px solid rgba(255, 255, 255, .8);
+        min-height: 120px;
+        min-width: 120px;
+        margin-right: 8px;
       `;
-  });
+    },
+  );
 
   const title = Widget.Label({
+    class_name: "title",
     hpack: "start",
     hexpand: true,
     max_width_chars: 24,
@@ -48,9 +45,19 @@ export const Player = (player: MprisPlayer) => {
     label: player.bind("track_title"),
   });
 
+  const playerName = Widget.Label({
+    class_name: "name",
+    hpack: "start",
+    hexpand: true,
+    max_width_chars: 24,
+    truncate: "end",
+    wrap: true,
+    label: player.bind("name").as((o) => o.toUpperCase()),
+  });
+
   const artists = Widget.Label({
     hpack: "start",
-    css: "font-weight: 100;",
+    class_name: "artists",
     max_width_chars: 24,
     truncate: "end",
     wrap: true,
@@ -64,7 +71,7 @@ export const Player = (player: MprisPlayer) => {
       player.position = value * player.length;
     },
     css: `
-        padding: 0;
+        padding: 0px;
     `,
     setup: (self) => {
       const update = () => {
@@ -101,48 +108,47 @@ export const Player = (player: MprisPlayer) => {
   const previous = Widget.Button({
     class_name: "player-control-icons",
     on_primary_click: () => player?.previous(),
-    child: Widget.Label({
-      label: PREV_ICON,
-    }),
-  });
-
-  const playPause = Widget.Button({
-    class_name: "player-control-icons",
-    on_primary_click: () => player?.playPause(),
-    child: Widget.Label({
-      label: player.bind("play_back_status").as((pbs) => {
-        switch (pbs) {
-          case "Playing":
-            return PAUSE_ICON;
-          case "Paused":
-            return PLAY_ICON;
-          default:
-            return FALLBACK_ICON;
-        }
-      }),
+    child: Widget.Icon({
+      icon: icons.mpris.prev,
     }),
   });
 
   const next = Widget.Button({
     class_name: "player-control-icons",
     on_primary_click: () => player?.next(),
-    child: Widget.Label({
-      label: NEXT_ICON,
+    child: Widget.Icon({
+      icon: icons.mpris.next,
     }),
   });
 
-  const playerIcon = Widget.Label({
-    css: "margin-right: 5px;",
-    label: player.bind("name").as((n) => playerIcons(n)),
+  const playPause = Widget.Button({
+    class_name: "player-control-icons",
+    on_primary_click: () => player?.playPause(),
+    child: Widget.Icon({
+      icon: player.bind("play_back_status").as((pbs) => {
+        switch (pbs) {
+          case "Playing":
+            return icons.mpris.playing;
+          case "Paused":
+            return icons.mpris.paused;
+          default:
+            return icons.mpris.playing;
+        }
+      }),
+    }),
+  });
+
+  const playerIcon = Widget.Icon({
+    css: "font-size: 20px;",
+    icon: player
+      .bind("name")
+      .as((n) => icons.mpris.playerIcons[n] ?? icons.mpris.playerIcons.default),
   });
 
   return Widget.Box({
     hexpand: true,
     name: "mpris-player",
-    css: `
-        min-width: 20rem;
-        padding: 6px;
-      `,
+    css: "min-width: 20rem; padding: 8px;",
     children: [
       albumArt,
       Widget.Box(
@@ -152,7 +158,11 @@ export const Player = (player: MprisPlayer) => {
         },
         Widget.Box(
           { vertical: true },
-          Widget.Box([title, playerIcon]),
+          Widget.Box({
+            css: "padding-bottom: 4px;",
+            children: [playerName, playerIcon],
+          }),
+          title,
           artists,
         ),
         Widget.Box({ vexpand: true }),
@@ -160,7 +170,10 @@ export const Player = (player: MprisPlayer) => {
         Widget.CenterBox({
           css: "padding-top: 4px;",
           startWidget: position,
-          centerWidget: Widget.Box([previous, playPause, next]),
+          centerWidget: Widget.Box({
+            spacing: 4,
+            children: [previous, playPause, next],
+          }),
           endWidget: length,
         }),
       ),
@@ -191,7 +204,7 @@ export default () =>
       on_primary_click: () => playerChange("prev"),
       on_secondary_click: () => playerChange("next"),
       child: Widget.Stack({
-        css: "padding: 6px; background-color: transparent;",
+        css: "background-color: transparent;",
         children: players.as((p) =>
           Object.assign(
             {},
