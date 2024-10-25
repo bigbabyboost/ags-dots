@@ -3,7 +3,7 @@ import icons from "lib/icons";
 
 export default (notis: Notifications) => {
   const title = Widget.Label({
-    label: " Notifications",
+    label: "NOTIFICATIONS",
     xalign: 0,
     hexpand: true,
   });
@@ -40,7 +40,21 @@ export default (notis: Notifications) => {
     children: [
       Widget.Box({
         spacing: 8,
-        children: [title, dndToggleBtn, clearAllBtn],
+        children: [
+          Widget.Box([
+            Widget.Separator({
+              css: `
+                margin: 6px 0; 
+                margin-right: 4px;
+                min-width: 3px; 
+                border-radius: 1rem
+              `,
+            }),
+            title,
+          ]),
+          dndToggleBtn,
+          clearAllBtn,
+        ],
       }),
     ],
   });

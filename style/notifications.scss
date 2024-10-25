@@ -53,6 +53,7 @@ window#notifications {
   background-color: $base;
   color: $color01;
   border: 3px solid $color03;
+  border-radius: $border-radius;
 
   .notifications-fallback {
     background-color: $bg-alt;
@@ -63,12 +64,12 @@ window#notifications {
 
 
   .notification {
-    background-color: rgba($color00, 0.8);
-    border: 2px solid rgba($color01, 0.2);
+    background-color: $color00;
+    border: none;
     border-radius: $border-radius;
 
     .notification-image {
-      border-radius: 4px;
+      border-radius: $border-radius;
     }
   }
 
@@ -77,10 +78,16 @@ window#notifications {
   }
 
   .notifications-header {
-    border: $border;
-    background-color: $bg-alt;
-    padding: 8px;
+    padding: 4px;
     border-radius: $border-radius;
+
+    separator {
+      background-color: $color07;
+    }
+
+    label {
+      font-size: 15px;
+    }
 
     .notifications-disabled {
       background-color: $color05;
@@ -94,10 +101,14 @@ window#notifications {
     button {
       background-color: $color00;
       min-height: 1.8rem;
+      border-radius: 4px;
+      padding: 6px;
+      min-width: 20px;
+      min-height: 20px;
 
       &:hover {
         @include transition-color;
-        background-color: $color05;
+        background-color: $color03;
 
         image {
           color: $color00;

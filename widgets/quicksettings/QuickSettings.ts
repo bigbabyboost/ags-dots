@@ -33,6 +33,5 @@ export default () =>
     name: "quicksettings",
     anchor: ["left", "top", "bottom"],
     css: "background: transparent;",
-    layer: "overlay",
     child: ControlPannel(),
   });
