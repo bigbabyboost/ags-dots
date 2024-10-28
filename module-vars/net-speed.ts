@@ -3,6 +3,8 @@ import GLib from "gi://GLib";
 const interfaceName = "enp5s0";
 
 type NetStatData = {
+  bytesIn: number;
+  bytesOut: number;
   in: string;
   out: string;
 };
@@ -53,13 +55,21 @@ const computeNetwork = (): NetStatData => {
 
     prevNetUsage = { rx, tx, time: currentTime };
 
-    return { in: formatData(rxRate), out: formatData(txRate) };
+    return {
+      bytesIn: rxRate,
+      bytesOut: txRate,
+      in: formatData(rxRate),
+      out: formatData(txRate),
+    };
   } catch (error) {
     console.error("Error calculating network usage:", error);
     return { in: "", out: "" } as NetStatData;
   }
 };
 
-export const getNetworkSpeed = Variable({ in: "", out: "" } as NetStatData, {
-  poll: [2000, computeNetwork],
-});
+export const getNetworkSpeed = Variable(
+  { bytesIn: 0, bytesOut: 0, in: "", out: "" } as NetStatData,
+  {
+    poll: [2000, computeNetwork],
+  },
+);

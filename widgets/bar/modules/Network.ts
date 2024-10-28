@@ -12,9 +12,10 @@ const NetworkIndicator = () =>
         self.visible = !!icon;
       }),
       Widget.Label({ class_name: "value" }).hook(speed, (self) => {
-        const d = Number.parseInt(speed.value.in);
-        const o = Number.parseInt(speed.value.out);
-        self.label = d > o ? `${speed.value.in} 󰦿` : `${speed.value.out} 󰧇`;
+        self.label =
+          speed.value.bytesIn > speed.value.bytesOut
+            ? `${speed.value.in} 󰦿`
+            : `${speed.value.out} 󰧇`;
       }),
     ],
   });
