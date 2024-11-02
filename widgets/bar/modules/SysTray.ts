@@ -1,6 +1,5 @@
 import type { TrayItem } from "types/service/systemtray";
 import Separator from "./Separator.ts";
-import GdkPixbuf from "types/@girs/gdkpixbuf-2.0/gdkpixbuf-2.0";
 
 const systemtray = await Service.import("systemtray");
 const ignoreList = ["KDE Connect Indicator"];
