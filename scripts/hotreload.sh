@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 DIR="$HOME/.config/ags"
-CONFIG_FILES=$(find "$DIR/widgets" -type f -name "*.ts")
+CONFIG_FILES=$(find "$DIR/" -type f -name "*.ts")
 
 trap "pkill ags" EXIT
 
