@@ -116,8 +116,13 @@ highlight {
 .media {
   color: $color01;
 
+  &:hover {
+    background: $color00;
+  }
+
   .player-icon {
     background: $color00;
+    border-radius: 2rem;
     color: $color09;
 
     &:hover {

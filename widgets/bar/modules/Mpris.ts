@@ -1,10 +1,8 @@
-import icons from "lib/icons";
-
 const mpris = await Service.import("mpris");
 
 function statusIcon(status: "Playing" | "Paused" | "Stopped") {
-  if (status === "Playing") return " ";
-  return " ";
+  if (status === "Playing") return "";
+  return " Paused";
 }
 
 interface PlayerProps {
@@ -15,7 +13,6 @@ interface PlayerProps {
 }
 
 const Player = ({
-  name,
   track_artists,
   track_title,
   play_back_status,
@@ -58,36 +55,32 @@ const Player = ({
 export default () =>
   Widget.Box({
     class_name: "media",
-    child: Widget.EventBox({
-      setup: (self) =>
-        self.hook(mpris, (self) => {
-          const player =
-            mpris.getPlayer("spotify") || mpris.getPlayer() || null;
+    child: Widget.EventBox().hook(mpris, (self) => {
+      const player = mpris.getPlayer("spotify") || mpris.getPlayer() || null;
 
-          if (!player) {
-            return;
-          }
+      if (!player) {
+        return;
+      }
 
-          // Player controls
-          self.on_primary_click = player.playPause;
-          self.on_scroll_down = player.next;
-          self.on_scroll_up = player.previous;
+      // Player controls
+      self.on_primary_click = player.playPause;
+      self.on_scroll_down = player.next;
+      self.on_scroll_up = player.previous;
 
-          self.class_name = player.play_back_status.toLowerCase();
+      self.class_name = player.play_back_status.toLowerCase();
 
-          const { name, track_artists, track_title, play_back_status } = player;
-          if (play_back_status !== "Stopped") {
-            self.child = Player({
-              name: name,
-              track_artists: track_artists,
-              track_title: track_title,
-              play_back_status: play_back_status,
-            });
-          } else {
-            self.child = Widget.Label({
-              label: "",
-            });
-          }
-        }),
+      const { name, track_artists, track_title, play_back_status } = player;
+      if (play_back_status !== "Stopped") {
+        self.child = Player({
+          name: name,
+          track_artists: track_artists,
+          track_title: track_title,
+          play_back_status: play_back_status,
+        });
+      } else {
+        self.child = Widget.Label({
+          label: "",
+        });
+      }
     }),
   });
