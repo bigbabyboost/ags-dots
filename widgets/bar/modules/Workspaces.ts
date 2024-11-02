@@ -1,6 +1,7 @@
 const hyprland = await Service.import("hyprland");
 
-const dispatch = (ws) => hyprland.messageAsync(`dispatch workspace ${ws}`);
+const dispatch = (ws: string | number) =>
+  hyprland.messageAsync(`dispatch workspace ${ws}`);
 
 export default () =>
   Widget.EventBox({
