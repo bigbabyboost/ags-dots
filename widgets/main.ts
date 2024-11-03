@@ -5,10 +5,12 @@ import OSD from "./osd/OSD.ts";
 import NotificationCenter from "./notifications/notification-center/NotificationCenter";
 import QuickSettings from "./quicksettings/QuickSettings";
 import Flatpak from "./updates/Flatpak";
+import Wallpapers from "./wallpapers/Wallpapers";
 
 export default {
   windows: [
     Bar(),
+    Wallpapers(),
     NotificationPopups(),
     OSD(),
     Mpris(),
