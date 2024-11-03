@@ -8,7 +8,6 @@ const SysTrayItem = (item: TrayItem) =>
   Widget.Button({
     class_name: "systray-icon",
     css: "padding: 0 4px;",
-    // child: Widget.Icon({ icon: item.bind("icon") }),
     child: Widget.Icon().hook(systemtray, (self) => {
       if (item.title === "TelegramDesktop") {
         self.icon = "org.telegram.desktop";
@@ -28,11 +27,12 @@ export default () =>
     class_name: "systray",
     setup: (self) =>
       self.hook(systemtray, () => {
-        self.children = systemtray.items
+        const trayItems = systemtray.items
           .filter(({ id }) => id && !ignoreList.includes(id))
           .map(SysTrayItem);
+        self.children = trayItems;
 
-        if (systemtray.items.length > 0) {
+        if (trayItems.length > 0) {
           self.add(Separator());
         }
 
