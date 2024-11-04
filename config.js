@@ -1,4 +1,4 @@
-const entry = App.configDir + "/widgets/main.ts";
+const entry = `${App.configDir}/widgets/main.ts`;
 const outdir = "/tmp/ags/main.js";
 const scss = `${App.configDir}/style/style.scss`;
 const css = `${App.configDir}/style.css`;
@@ -13,7 +13,7 @@ function reloadCss() {
 reloadCss();
 
 // Monitor scss changes and reapply css
-Utils.monitorFile(`${App.configDir}/style`, function () {
+Utils.monitorFile(`${App.configDir}/style`, () => {
   reloadCss();
 });
 
