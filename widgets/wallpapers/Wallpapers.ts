@@ -36,35 +36,41 @@ const Body = () =>
     }),
   });
 
-const Footer = () =>
-  Widget.Box({
+const Footer = () => {
+  const addWallsBtn = Widget.Button({
+    label: "Add Walls",
+    class_name: "add-walls-btn",
+    on_primary_click: () => {
+      bash(`${App.configDir}/scripts/swww.sh`).then((out) => {
+        if (!out) return;
+        pictures.value = [...out.split("\n"), ...pictures.value];
+        bash(
+          `bash -c 'notify-send "WALLPAPERS" "Selected wallpapers successfully added:)"'`,
+        );
+      });
+    },
+  });
+
+  return Widget.Box({
+    class_name: "footer",
     spacing: 6,
     children: [
       Header("WALLPAPERS"),
       Widget.Separator({ hexpand: true }),
-      Widget.Button({
-        label: "Add Walls",
-        on_primary_click: () => {
-          bash(`${App.configDir}/scripts/swww.sh`).then((out) => {
-            if (!out) return;
-            pictures.value = [...out.split("\n"), ...pictures.value];
-            bash(
-              `bash -c 'notify-send "WALLPAPERS" "Selected wallpapers successfully added:)"'`,
-            );
-          });
-        },
-      }),
+      addWallsBtn,
     ],
   });
+};
 
 export default () =>
   Widget.Window({
     name: WINDOW_NAME,
     visible: false,
     anchor: ["top", "right", "left"],
+    exclusivity: "exclusive",
     child: Widget.Box({
       vertical: true,
-      css: " padding: 10px;",
+      css: "padding: 10px;",
       spacing: 8,
       children: [Body(), Footer()],
     }),

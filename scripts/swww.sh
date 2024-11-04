@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 WALL_PATH="$HOME/.config/swww/compressed-walls"
+TITLE="WALLPAPERS"
 
 # Open a file picker dialog with a filter for PNG and JPG files
 files=$(zenity --file-selection --multiple --separator=":" \
@@ -19,6 +20,9 @@ fi
 
 # Process each selected file
 IFS=":" # Set the internal field separator to :
+
+notify-send $TITLE "Adding selected wallpapers..."
+
 for file_path in $files; do
     filename=$(basename ${file_path})
     ext="${filename##*.}"
@@ -27,12 +31,11 @@ for file_path in $files; do
     file_to_save="$WALL_PATH/${filename}.${ext}"
 
     if [ -f $file_to_save ]; then
-        notify-send "Wallpaper already added"
-        exit 1
+        notify-send $TITLE "Wallpaper ${filename} already exists"
+    else
+        magick convert -resize 640x480 \
+            "$file_path" $file_to_save &&
+            echo "$filename.$ext:$file_path" >>$WALL_PATH/log.txt &&
+            echo $file_to_save
     fi
-
-    magick convert -resize 640x480 \
-        "$file_path" $file_to_save &&
-        echo "$filename.$ext:$file_path" >>$WALL_PATH/log.txt &&
-        echo $file_to_save
 done

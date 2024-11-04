@@ -17,13 +17,18 @@
   }
 
   button {
-    background-color: $color03;
-    color: $base;
     min-height: 2rem;
     padding: 0 20px;
+    background-color: $color03;
+    color: $base;
+
+
 
     &:hover {
       background-color: $color05 ;
     }
+
+
   }
+
 }
