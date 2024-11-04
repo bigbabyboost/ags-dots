@@ -24,7 +24,7 @@ const parseFlatpakUpdates = (out: string): Flatpak[] => {
 };
 
 export const flatpakUpdates = Variable([] as Flatpak[], {
-  poll: [3600 * 30, updateCmd, (out) => parseFlatpakUpdates(out)],
+  poll: [1000 * 60 * 30, updateCmd, (out) => parseFlatpakUpdates(out)],
 });
 
 export const refetchFlatpakUpdates = () =>
