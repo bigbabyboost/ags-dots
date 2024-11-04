@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="$HOME/Pictures/wallpapers/"
+DIR="$1"
 
 files=$(find "$DIR" -type f \( -iname "*.jpg" -o -iname \
     "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \))

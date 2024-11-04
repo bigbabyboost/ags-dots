@@ -1,9 +1,12 @@
 import icons from "lib/icons";
 import { isFileExists } from "lib/utils";
+import { options } from "options";
 import type { MprisPlayer } from "types/service/mpris";
 
 const Mpris = await Service.import("mpris");
 const players = Mpris.bind("players");
+
+const { fallback_img } = options.mpris;
 
 function lengthStr(length: number) {
   const min = Math.floor(length / 60);
@@ -19,9 +22,7 @@ export const Player = (player: MprisPlayer) => {
       const { track_cover_url, cover_path } = player;
 
       const url = track_cover_url || cover_path;
-      const image = isFileExists(track_cover_url)
-        ? url
-        : "https://ik.imagekit.io/rayshold/gallery/mpris-fallback.webp";
+      const image = isFileExists(track_cover_url) ? url : fallback_img;
 
       self.css = `
         background-image: url("${image}");

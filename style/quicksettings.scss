@@ -1,14 +1,14 @@
 #quicksettings {
   .control-pannel {
     background: $base;
-    border: 2px solid $color03;
+    border: 3px solid $color03;
     padding: 8px;
-    border-radius: $border-radius;
+    // border-radius: $border-radius;
   }
 
   #mpris-player {
     border: $border;
-    border-radius: $border-radius;
+    // border-radius: $border-radius;
     border-color: $color05;
 
     trough {
@@ -40,7 +40,7 @@
 
   .sysfetch {
     border: $border;
-    border-radius: $border-radius;
+    // border-radius: $border-radius;
     border-color: $color06;
     padding: 8px;
     color: $color01;

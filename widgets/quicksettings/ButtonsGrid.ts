@@ -2,8 +2,10 @@ import { bash } from "lib/utils";
 import { nightlight } from "./nightlight";
 import { CustomButton } from "custom-widgets/CustomButton";
 import icons from "lib/icons";
+import { options } from "options";
 
 const showScreenthotOpts = Variable(false);
+const { screenshot, random_wall } = options.quicksettings;
 
 const ScreenshotOptions = () =>
   Widget.Revealer({
@@ -14,7 +16,7 @@ const ScreenshotOptions = () =>
         CustomButton({
           hexpand: true,
           on_primary_click: () => {
-            bash("hyprshot -m window");
+            bash(`hyprshot -m window --output-folder ${screenshot.path}`);
             showScreenthotOpts.value = false;
           },
           icon: "󱂬",
@@ -27,7 +29,7 @@ const ScreenshotOptions = () =>
           label: "Region",
           hexpand: true,
           on_primary_click: () => {
-            bash("hyprshot -m region");
+            bash(`hyprshot -m region --output-folder ${screenshot.path}`);
             showScreenthotOpts.value = false;
           },
         }),
@@ -101,7 +103,9 @@ export default () =>
                 iconType: "text",
                 label: "Random Wall",
                 on_primary_click: () =>
-                  Utils.exec("bash -c '$HOME/.config/ags/scripts/randwall.sh'"),
+                  Utils.exec(
+                    `bash -c '$HOME/.config/ags/scripts/randwall.sh ${random_wall.path}'`,
+                  ),
               }),
             ],
           }),

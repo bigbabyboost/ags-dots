@@ -1,9 +1,9 @@
 import GLib from "gi://GLib";
 import { bash } from "lib/utils";
 import { WINDOW_NAME } from "./Wallpapers";
+import { options } from "options";
 
-// Variables
-const WALL_PATH = `/home/${Utils.exec("whoami")}/.config/swww/compressed-walls`;
+const { path: WALL_PATH } = options.wallpaper_picker;
 
 export const pictures = Variable(
   Utils.exec(

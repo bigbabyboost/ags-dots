@@ -2,8 +2,10 @@ import Header from "custom-widgets/Header";
 import { bash } from "lib/utils";
 import { Fallback } from "custom-widgets/Fallback";
 import { pictures, setWall, removeWall } from "./wallpaperUtils";
+import { options } from "options";
 
 export const WINDOW_NAME = "wallpapers";
+const { path: WALL_PATH } = options.wallpaper_picker;
 
 // Widgets
 const Wallpaper = (wallpaper: string) =>
@@ -41,7 +43,7 @@ const Footer = () => {
     label: "Add Walls",
     class_name: "add-walls-btn",
     on_primary_click: () => {
-      bash(`${App.configDir}/scripts/swww.sh`).then((out) => {
+      bash(`${App.configDir}/scripts/swww.sh ${WALL_PATH}`).then((out) => {
         if (!out) return;
         pictures.value = [...out.split("\n"), ...pictures.value];
         bash(

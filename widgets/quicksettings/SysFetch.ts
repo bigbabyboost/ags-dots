@@ -5,12 +5,15 @@ import {
   kernelRelease,
   uptime,
 } from "module-vars/sysinfo";
+import { options } from "options";
 import { Capatilize } from "utils";
 
 const userName = Utils.exec("whoami");
 
+const { profile_picture } = options.quicksettings;
+
 const css = `
-    background-image: url("https://ik.imagekit.io/rayshold/gallery/lofi-anime-boy_863013-93642.avif");
+    background-image: url("${profile_picture}");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

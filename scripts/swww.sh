@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WALL_PATH="$HOME/.config/swww/compressed-walls"
+WALL_PATH="$1"
 TITLE="WALLPAPERS"
 
 # Open a file picker dialog with a filter for PNG and JPG files
@@ -33,7 +33,7 @@ for file_path in $files; do
     if [ -f $file_to_save ]; then
         notify-send $TITLE "Wallpaper ${filename} already exists"
     else
-        magick convert -resize 640x480 \
+        magick convert -resize 640x360 \
             "$file_path" $file_to_save &&
             echo "$filename.$ext:$file_path" >>$WALL_PATH/log.txt &&
             echo $file_to_save
