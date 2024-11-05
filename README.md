@@ -1,8 +1,30 @@
 |![image1](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-133359_hyprshot.png?updatedAt=1730733654701)|
 |---|
 
-|![image2](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-134310_hyprshot.png?updatedAt=1730733654687)|![image3](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-133932_hyprshot.png?updatedAt=1730733654956)|
+|![image2](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-134310_hyprshot.png?updatedAt=1730733654687)|![image3](https://ik.imagekit.io/rayshold/dotfiles/ags/flatpak-full.png?updatedAt=1730781100854)|
 |---|---|
+
+## Other Screenshots
+
+<details>
+    <summary><code>Flatpak widget with updates & no-updates</code></summary>
+    <table>
+      <tr>
+        <td>
+          <img src="https://ik.imagekit.io/rayshold/dotfiles/ags/ags-flatpakt.png?updatedAt=1730780831581" alt="flatpak full">
+        </td>
+        <td>
+          <img src="https://ik.imagekit.io/rayshold/dotfiles/ags/flatpak-empty.png?updatedAt=1730781288069" alt="flatpak empty">
+        </td>
+      </tr>
+      <tr>
+        <td align="center">With Updates</td>
+        <td align="center">No Updates</td>
+      </tr>
+    </table>
+</details>
+
+
 
 ## Requirements
 
