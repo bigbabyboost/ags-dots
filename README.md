@@ -37,6 +37,9 @@
 - `swww` - wallpaper-picker & other related stuff
 - `imagemagick` - for compressing images
 - `flatpak` - flatpak update widget
+- `zenity` - file-picker
+
+Sometimes I forget which packages are required, so I may not always update the README accordingly. Please keep that in mind. 🙈
 
 **Fonts**
 
