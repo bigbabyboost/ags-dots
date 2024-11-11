@@ -1,7 +1,9 @@
 const entry = `${App.configDir}/widgets/main.ts`;
 const outdir = "/tmp/ags/main.js";
 const scss = `${App.configDir}/style/style.scss`;
-const css = `${App.configDir}/style.css`;
+const css = "/tmp/ags/style.css";
+
+Utils.ensureDirectory("/tmp/ags");
 
 function reloadCss() {
   App.resetCss();
