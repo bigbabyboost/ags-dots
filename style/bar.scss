@@ -121,23 +121,17 @@ highlight {
   }
 
   .player-icon {
-    background: $color00;
-    border-radius: 2rem;
     color: $color09;
-
-    &:hover {
-      background: $color03;
-      color: $color00;
-    }
   }
 
   .paused {
-    font-style: italic;
-    color: $color07;
+    .status-icon {
+      color: $color07;
+    }
   }
 
   .status-icon {
-    color: $color01;
+    color: $color05;
   }
 }
 

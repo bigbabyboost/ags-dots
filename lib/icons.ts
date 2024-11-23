@@ -42,7 +42,7 @@ export default {
     playerIcons: {
       spotify: "com.spotify.Client",
       lollypop: "org.gnome.Lollypop",
-      firefox: "org.mozilla.firefox.BaseApp",
+      firefox: "io.gitlab.librewolf-community",
       chromium: "com.google.Chrome",
       brave: "com.brave.Browser",
       tauon: "com.github.taiko2k.tauonmb",

@@ -1,7 +1,9 @@
+import icons from "lib/icons";
+
 const mpris = await Service.import("mpris");
 
 function statusIcon(status: "Playing" | "Paused" | "Stopped") {
-  if (status === "Playing") return "";
+  if (status === "Playing") return " Playing";
   return " Paused";
 }
 
@@ -16,13 +18,27 @@ const Player = ({
   track_artists,
   track_title,
   play_back_status,
+  name,
 }: PlayerProps) => {
-  const icon = Widget.Button({
-    class_name: "player-icon",
-    on_primary_click: () => App.toggleWindow("mpris-player-window"),
-    child: Widget.Label({
-      label: "󰎇",
-    }),
+  const icon = Widget.Box({
+    spacing: 2,
+    children: [
+      Widget.Button({
+        css: "padding-right: 2px;",
+        class_name: "player-icon",
+        on_primary_click: () => App.toggleWindow("mpris-player-window"),
+        child: Widget.Icon({
+          icon:
+            icons.mpris.playerIcons[name] ?? icons.mpris.playerIcons.default,
+          size: 18,
+        }),
+      }),
+
+      Widget.Label({
+        label: "",
+        css: "font-size: 10; padding-right: 1px;",
+      }),
+    ],
   });
 
   const title = Widget.Label({
@@ -39,6 +55,11 @@ const Player = ({
     truncate: "end",
     wrap: true,
     label: `${track_artists.join(", ")} -`,
+    setup: (self) =>
+      self.hook(
+        mpris,
+        () => track_artists.filter((i) => i !== "").length === 0 && self.hide(),
+      ),
   });
 
   const status = Widget.Label({
@@ -56,11 +77,16 @@ export default () =>
   Widget.Box({
     class_name: "media",
     child: Widget.EventBox().hook(mpris, (self) => {
-      const player = mpris.getPlayer("spotify") || mpris.getPlayer() || null;
+      // Players like Spotify & MPD get priority over any other player.
+      // Only when players in the priority list are stopped,
+      // other players will show up
+      let player = mpris.getPlayer("spotify") || mpris.getPlayer("mpd") || null;
 
-      if (!player) {
-        return;
+      if (player && player.play_back_status === "Stopped") {
+        player = mpris.getPlayer() || null;
       }
+
+      if (!player) return;
 
       // Player controls
       self.on_primary_click = player.playPause;
