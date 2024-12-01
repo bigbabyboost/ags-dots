@@ -31,7 +31,7 @@
 - `bun` - for building & compiling stuff
 - `sassc` - to compile "scss" files to "css"
 - `pipewire` - volume Control
-- `libtop` - resource usage
+- `libgtop` - resource usage
 - `networkmanager`
 - `hyprshade`, `hyprpicker` - nightlight & colorpicker
 - `swww` - wallpaper-picker & other related stuff
