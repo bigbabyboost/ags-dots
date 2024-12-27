@@ -1,15 +1,14 @@
-import ClientTitle from "./modules/ClientTitle.ts";
 import Clock from "./modules/Clock.ts";
-import OsIcon from "./modules/OsIcon.ts";
+import FlatpakUpdatesCount from "./modules/FlatpakUpdatesCount";
+import Mpris from "./modules/Mpris.ts";
+import { NetworkIndicator } from "./modules/Network.ts";
+import NotifyIcon from "./modules/NotifyIcon";
+import OsIcon from "./modules/OsIcon";
 import Separator from "./modules/Separator";
+import { CpuUsage, MemoryUsage } from "./modules/SysMonitor.ts";
 import SysTray from "./modules/SysTray.ts";
 import Volume from "./modules/Volume.ts";
 import Workspaces from "./modules/Workspaces.ts";
-import { CpuUsage, MemoryUsage } from "./modules/SysMonitor.ts";
-import { NetworkIndicator } from "./modules/Network.ts";
-import Mpris from "./modules/Mpris.ts";
-import NotifyIcon from "./modules/NotifyIcon";
-import FlatpakUpdatesCount from "./modules/FlatpakUpdatesCount";
 
 // Bar layouts
 const Left = () =>
@@ -24,7 +23,6 @@ const Left = () =>
       Separator(),
       MemoryUsage(),
       FlatpakUpdatesCount(),
-      ClientTitle(),
     ],
   });
 

@@ -26,7 +26,6 @@ const Player = ({
       Widget.Button({
         css: "padding-right: 2px;",
         class_name: "player-icon",
-        on_primary_click: () => App.toggleWindow("mpris-player-window"),
         child: Widget.Icon({
           icon:
             icons.mpris.playerIcons[name] ?? icons.mpris.playerIcons.default,
@@ -69,7 +68,7 @@ const Player = ({
 
   return Widget.Box({
     spacing: 6,
-    children: [icon, artist, title, status],
+    children: [icon, title, status],
   });
 };
 
@@ -77,14 +76,11 @@ export default () =>
   Widget.Box({
     class_name: "media",
     child: Widget.EventBox().hook(mpris, (self) => {
-      // Players like Spotify & MPD get priority over any other player.
-      // Only when players in the priority list are stopped,
-      // other players will show up
-      let player = mpris.getPlayer("spotify") || mpris.getPlayer("mpd") || null;
-
-      if (player && player.play_back_status === "Stopped") {
-        player = mpris.getPlayer() || null;
-      }
+      const player =
+        mpris.getPlayer("spotify") ||
+        mpris.getPlayer("tauon") ||
+        mpris.getPlayer() ||
+        null;
 
       if (!player) return;
 
@@ -109,4 +105,12 @@ export default () =>
         });
       }
     }),
+    setup: (self) =>
+      self.hook(mpris, () => {
+        if (mpris.players.length === 0) {
+          self.hide();
+        } else {
+          self.show();
+        }
+      }),
   });

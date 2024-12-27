@@ -2,12 +2,21 @@
 
 .notification {
   background-color: $base;
-  padding: 6px;
   border: 2px solid $color01;
+  padding: 6px;
   margin-bottom: 6px;
+  border-radius: $rounded-lg;
+
+  .horizontal-line {
+    background-color: transparentize($color01 , 0.8);
+  }
+
+  .title {
+    font-size: 12.5px;
+  }
 
   .description {
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 400;
     margin-top: 2px;
   }
@@ -21,9 +30,28 @@
   }
 
   .time {
-    color: $color05;
+    color: $color03;
     margin-right: 10px;
     border-radius: 10rem;
+  }
+
+  .close-button {
+    &:hover {
+      image {
+        color: $color04;
+      }
+    }
+
+  }
+
+  .action-buttons button {
+    background: $color00;
+    color: $color01;
+
+    &:hover {
+      background: $color01;
+      color: $color00;
+    }
   }
 
   .app-name {
@@ -52,14 +80,17 @@ window#notifications {
 #notification-center {
   background-color: $base;
   color: $color01;
-  border: 3px solid $color03;
-  // border-radius: $border-radius;
+  border: $border;
+  border-radius: $rounded-lg;
 
   .notifications-fallback {
-    background-color: $bg-alt;
-    border: $border;
+    background: transparent;
     border-radius: $border-radius;
-    color: transparentize($color01, 0.8)
+
+    label,
+    image {
+      color: transparentize($color01, 0.6);
+    }
   }
 
 
@@ -70,6 +101,16 @@ window#notifications {
 
     .notification-image {
       border-radius: $border-radius;
+    }
+
+
+    .action-buttons button {
+      background: $base;
+
+      &:hover {
+        background: $color01;
+        color: $color00
+      }
     }
   }
 
@@ -100,8 +141,8 @@ window#notifications {
 
     button {
       background-color: $color00;
-      min-height: 1.8rem;
-      border-radius: 4px;
+      color: $color01;
+      border-radius: 1rem;
       padding: 6px;
       min-width: 20px;
       min-height: 20px;
