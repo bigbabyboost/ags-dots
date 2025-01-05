@@ -14,8 +14,8 @@ const NetworkIndicator = () =>
       Widget.Label({ class_name: "value" }).hook(speed, (self) => {
         self.label =
           speed.value.bytesIn > speed.value.bytesOut
-            ? `${speed.value.in} 󰦿`
-            : `${speed.value.out} 󰧇`;
+            ? `${speed.value.in}`
+            : `${speed.value.out}`;
       }),
     ],
   });

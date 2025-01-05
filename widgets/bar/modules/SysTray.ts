@@ -1,5 +1,4 @@
 import type { TrayItem } from "types/service/systemtray";
-import Separator from "./Separator.ts";
 
 const systemtray = await Service.import("systemtray");
 const ignoreList = ["KDE Connect Indicator"];
@@ -31,10 +30,6 @@ export default () =>
           .filter(({ id }) => id && !ignoreList.includes(id))
           .map(SysTrayItem);
         self.children = trayItems;
-
-        if (trayItems.length > 0) {
-          self.add(Separator());
-        }
 
         self.show_all();
       }),

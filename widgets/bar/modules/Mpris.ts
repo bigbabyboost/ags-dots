@@ -1,51 +1,14 @@
-import icons from "lib/icons";
+import type { MprisPlayer } from "types/service/mpris";
 
 const mpris = await Service.import("mpris");
 
-function statusIcon(status: "Playing" | "Paused" | "Stopped") {
-  if (status === "Playing") return " Playing";
-  return " Paused";
-}
-
-interface PlayerProps {
-  name: string;
-  track_artists: string[];
-  track_title: string;
-  play_back_status: "Playing" | "Paused" | "Stopped";
-}
-
-const Player = ({
-  track_artists,
-  track_title,
-  play_back_status,
-  name,
-}: PlayerProps) => {
-  const icon = Widget.Box({
-    spacing: 2,
-    children: [
-      Widget.Button({
-        css: "padding-right: 2px;",
-        class_name: "player-icon",
-        child: Widget.Icon({
-          icon:
-            icons.mpris.playerIcons[name] ?? icons.mpris.playerIcons.default,
-          size: 18,
-        }),
-      }),
-
-      Widget.Label({
-        label: "",
-        css: "font-size: 10; padding-right: 1px;",
-      }),
-    ],
-  });
-
+const Player = ({ track_artists, track_title }: Partial<MprisPlayer>) => {
   const title = Widget.Label({
     class_name: "title",
     max_width_chars: 24,
     truncate: "end",
     wrap: true,
-    label: track_title,
+    label: track_title?.split("(")[0].trim(),
   });
 
   const artist = Widget.Label({
@@ -53,29 +16,26 @@ const Player = ({
     max_width_chars: 24,
     truncate: "end",
     wrap: true,
-    label: `${track_artists.join(", ")} -`,
+    label: `- ${track_artists?.join(", ")}`,
     setup: (self) =>
       self.hook(
         mpris,
-        () => track_artists.filter((i) => i !== "").length === 0 && self.hide(),
+        () =>
+          track_artists?.filter((i) => i !== "").length === 0 && self.hide(),
       ),
-  });
-
-  const status = Widget.Label({
-    class_name: "status-icon",
-    label: statusIcon(play_back_status),
   });
 
   return Widget.Box({
     spacing: 6,
-    children: [icon, title, status],
+    class_name: "media-info",
+    children: [Widget.Label("󰎇"), title, artist],
   });
 };
 
 export default () =>
   Widget.Box({
     class_name: "media",
-    child: Widget.EventBox().hook(mpris, (self) => {
+    child: Widget.Button().hook(mpris, (self) => {
       const player =
         mpris.getPlayer("spotify") ||
         mpris.getPlayer("tauon") ||
@@ -92,6 +52,7 @@ export default () =>
       self.class_name = player.play_back_status.toLowerCase();
 
       const { name, track_artists, track_title, play_back_status } = player;
+
       if (play_back_status !== "Stopped") {
         self.child = Player({
           name: name,

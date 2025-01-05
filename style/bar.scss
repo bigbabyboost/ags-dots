@@ -1,12 +1,15 @@
 @import "./mixines/transition.scss";
 
+$accent: transparentize($color00, 0.3);
+// $border-radius: 8px;
+
 window {
   background-color: $base;
   color: $color00;
 }
 
 .bar {
-  padding: 4px 10px;
+  padding: 4px 6px;
 }
 
 button {
@@ -32,17 +35,21 @@ highlight {
   min-height: 8px;
 }
 
-.distro-icon {
+.qs-button {
   @include transition-color;
-  color: $color03;
+  all: unset;
+  color: $color01;
+  background: $accent;
+  padding: 0px 10px;
+  border-radius: $rounded-md;
 
   label {
-    font-size: 16px;
-    padding-right: 6px;
+    font-size: $font-size;
   }
 
   &:hover {
-    color: $color01;
+    background: $color03;
+    color: $color00;
   }
 }
 
@@ -56,31 +63,27 @@ highlight {
 .flatpak-updates-count,
 .client-title,
 .volume-indicator,
-.clock,
-.network-indicator {
+.clock {
   .value {
+    padding: 0px 10px;
+    padding-left: 0;
+    border-radius: 0px $rounded-md $rounded-md 0;
+    background: $accent;
+    color: $color01;
+  }
+
+  .icon {
+    border-radius: $rounded-md 0 0 $rounded-md;
+    background: $accent;
+    padding-left: 10px;
     color: $color01;
   }
 }
 
-.cpu-usage .icon {
-  color: $color11;
-}
-
-.memory-usage .icon {
-  color: $color10;
-}
-
-.client-title .icon {
-  color: $color07;
-}
-
-.flatpak-updates-count .icon {
-  color: $color05;
-  background: inherit;
-}
-
 .workspaces {
+  background: $accent;
+  padding: 0 10px;
+  border-radius: $rounded-md;
 
   button {
     all: unset;
@@ -113,29 +116,27 @@ highlight {
 }
 
 
-.media {
+.media button {
   color: $color01;
+  border-radius: $rounded-md;
+  padding: 0 10px;
+  background: $accent;
 
   &:hover {
-    background: $color00;
+    color: $color00;
+    background: $color03;
   }
 
-  .player-icon {
-    color: $color09;
-  }
-
-  .paused {
-    .status-icon {
-      color: $color07;
-    }
-  }
-
-  .status-icon {
-    color: $color05;
+  &.paused {
+    color: $color00;
+    background: $color07;
   }
 }
 
 .systray {
+  background: $color00;
+  border-radius: $rounded-md;
+
   button {
     all: unset
   }
@@ -145,20 +146,15 @@ highlight {
   }
 
   .systray-icon.custom {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
 .network-indicator {
-  color: $color03;
-}
-
-.volume-indicator .icon {
-  color: $color05;
-}
-
-.clock .icon {
-  color: $color06;
+  color: $color01;
+  border-radius: $rounded-md;
+  background: $accent;
+  padding: 0px 10px;
 }
 
 label {
@@ -172,18 +168,28 @@ label {
 }
 
 .notify-icon {
+  all: unset;
   @include transition-color;
-  color: $color05;
+  color: $color01;
+  background: $accent;
+  padding: 0 $rounded-md;
+  border-radius: $rounded-md;
 
   &:hover {
-    color: $color01;
+    background: $color03;
+    color: $color00;
   }
 
   image {
-    font-size: 15;
+    font-size: $font-size;
   }
 
-  .has-notifications {
+  &.has-notifications {
     color: $color04;
+
+    &:hover {
+      background: $color04;
+      color: $color00;
+    }
   }
 }

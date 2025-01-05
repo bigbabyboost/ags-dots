@@ -1,12 +1,10 @@
 import { flatpakUpdates } from "module-vars/updates/flatpak";
-import Separator from "./Separator";
 
 export default () =>
   Widget.Revealer({
     child: Widget.Box({
       class_name: "flatpak-updates-count",
       children: [
-        Separator(),
         Widget.Button({
           class_name: "icon",
           on_primary_click: () => App.toggleWindow("flatpak-updates"),

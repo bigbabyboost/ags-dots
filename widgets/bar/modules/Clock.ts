@@ -4,7 +4,7 @@ import type { DateTime } from "types/@girs/glib-2.0/glib-2.0.cjs";
 
 const format = opt("%A %d - %R");
 
-const date = Variable(GLib.DateTime.new_now_local(), {
+export const date = Variable(GLib.DateTime.new_now_local(), {
   poll: [1000, (): DateTime => GLib.DateTime.new_now_local()],
 });
 

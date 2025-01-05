@@ -1,11 +1,13 @@
 // @import "/home/ray/.config/stylix/ags-colors.scss";
 @import "./colors.scss";
 
+$font-size: 14px;
+
 * {
-  // font-family: "CommitMono Nerd Font";
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 14px;
+  font-size: $font-size;
 }
+
 
 @import "./global.scss";
 @import "./extra.scss";

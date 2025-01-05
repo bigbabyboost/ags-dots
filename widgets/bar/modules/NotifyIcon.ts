@@ -3,22 +3,23 @@ import icons from "lib/icons";
 export const notis = await Service.import("notifications");
 
 export default () =>
-  Widget.EventBox({
-    class_name: "notify-icon",
+  Widget.Button({
     on_primary_click: () => App.toggleWindow("notification-center"),
     on_secondary_click: () => {
       notis.dnd = !notis.dnd;
     },
+    setup: (self) =>
+      self.hook(notis, () => {
+        if (notis.notifications.length > 0 && !notis.dnd) {
+          self.class_name = "notify-icon has-notifications";
+        } else self.class_name = "notify-icon";
 
-    child: Widget.Icon().hook(notis, (self) => {
-      self.icon = icons.notification.default;
+        self.child = Widget.Icon({
+          icon: notis.dnd
+            ? icons.notification.disabled
+            : icons.notification.default,
+        });
 
-      if (notis.dnd === true) {
-        self.icon = icons.notification.disabled;
-      }
-      self.toggleClassName(
-        "has-notifications",
-        notis.notifications.length > 0 && !notis.dnd,
-      );
-    }),
+        self.show_all();
+      }),
   });
