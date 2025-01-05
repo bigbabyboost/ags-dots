@@ -5,15 +5,15 @@ const mpris = await Service.import("mpris");
 const Player = ({ track_artists, track_title }: Partial<MprisPlayer>) => {
   const title = Widget.Label({
     class_name: "title",
-    max_width_chars: 24,
+    max_width_chars: 16,
     truncate: "end",
     wrap: true,
-    label: track_title?.split("(")[0].trim(),
+    label: track_title?.replace(/\[.*?\]|\(.*?\)|\{.*?\}/g, "").trim(),
   });
 
   const artist = Widget.Label({
     class_name: "artist",
-    max_width_chars: 24,
+    max_width_chars: 16,
     truncate: "end",
     wrap: true,
     label: `- ${track_artists?.join(", ")}`,
