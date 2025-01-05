@@ -32,9 +32,9 @@ const formatData = (value: number): string => {
   const valueInKiB = value / 1e3;
 
   if (valueInKiB > 1000) {
-    return `${(value / 1e6).toFixed(1)}MB/s`;
+    return `${(value / 1e6).toFixed(1)} MB/s`;
   }
-  return `${valueInKiB.toFixed(1)}kB/s`;
+  return `${valueInKiB.toFixed(1)} KB/s`;
 };
 
 const computeNetwork = (): NetStatData => {

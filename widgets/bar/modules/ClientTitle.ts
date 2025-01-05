@@ -14,12 +14,12 @@ export default () =>
         class_name: "value",
         label: hyprland.active.client
           .bind("class")
-          .as((v) => Capatilize(v.replace("-", " "))),
+          .as((v) => Capatilize(v.replace("-", " ") ?? "")),
       }),
     ],
     setup: (self) =>
       self.hook(hyprland, () => {
-        if (hyprland.active.client.class === "") {
+        if (hyprland.active.client.title === "") {
           self.hide();
         } else self.show_all();
       }),

@@ -33,8 +33,8 @@ const MemoryUsage = () =>
         class_name: "value",
         setup: (self) =>
           self.hook(memUsage, () => {
-            const used = divide(memUsage.value.used, 1024);
-            self.label = `${used}MiB`;
+            const used = (memUsage.value.used / 1024).toFixed(0);
+            self.label = `${used} MiB`;
           }),
       }),
     ],

@@ -1,10 +1,10 @@
-import ClientTitle from "./modules/ClientTitle";
 import Clock from "./modules/Clock.ts";
 import FlatpakUpdatesCount from "./modules/FlatpakUpdatesCount";
 import Mpris from "./modules/Mpris.ts";
 import { NetworkIndicator } from "./modules/Network.ts";
 import NotifyIcon from "./modules/NotifyIcon";
 import QSButton from "./modules/QSButton";
+import QuickAccessButtons from "./modules/QuickAccessButtons";
 import { CpuUsage, MemoryUsage } from "./modules/SysMonitor.ts";
 import SysTray from "./modules/SysTray.ts";
 import Volume from "./modules/Volume.ts";
@@ -15,24 +15,30 @@ const Left = () =>
     spacing: 8,
     children: [
       QSButton,
+      Workspaces(),
       CpuUsage(),
       MemoryUsage(),
       FlatpakUpdatesCount(),
-      ClientTitle(),
     ],
   });
 
 const Center = () =>
   Widget.Box({
     spacing: 8,
-    children: [Workspaces(), Clock()],
+    children: [Clock(), SysTray()],
   });
 
 const Right = () =>
   Widget.Box({
     hpack: "end",
     spacing: 8,
-    children: [SysTray(), NetworkIndicator(), Volume(), Mpris(), NotifyIcon()],
+    children: [
+      Mpris(),
+      QuickAccessButtons,
+      NetworkIndicator(),
+      Volume(),
+      NotifyIcon(),
+    ],
   });
 
 export default (monitor = 0) =>

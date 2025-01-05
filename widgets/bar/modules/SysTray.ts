@@ -31,6 +31,8 @@ export default () =>
           .map(SysTrayItem);
         self.children = trayItems;
 
-        self.show_all();
+        if (trayItems.length > 0) {
+          self.show_all();
+        } else self.hide();
       }),
   });

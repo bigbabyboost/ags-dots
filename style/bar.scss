@@ -167,6 +167,22 @@ label {
   padding-right: 6px;
 }
 
+.quickaccess-buttons {
+  background: $accent;
+  padding-left: 10px;
+  padding-right: 16px;
+  border-radius: $rounded-md ;
+
+  button {
+    all: unset;
+    color: $color01;
+
+    &:hover {
+      color: $color03;
+    }
+  }
+}
+
 .notify-icon {
   all: unset;
   @include transition-color;
