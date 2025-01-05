@@ -1,9 +1,9 @@
-import Mpris from "widgets/mpris/Mpris";
 import ButtonsGrid from "./ButtonsGrid";
+import Calendar from "./Calendar";
+import Mpris from "./Mpris.ts";
 import Profile from "./Profile";
 
 export const notifications = await Service.import("notifications");
-const mpris = await Service.import("mpris");
 
 const ControlPannel = () => {
   return Widget.Box({
@@ -12,7 +12,7 @@ const ControlPannel = () => {
     css: "margin: 6px 6px;",
     vpack: "start",
     vertical: true,
-    children: [Profile(), ButtonsGrid(), Mpris()],
+    children: [Profile(), ButtonsGrid(), Mpris(), Calendar()],
   });
 };
 

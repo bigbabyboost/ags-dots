@@ -4,12 +4,11 @@
     border: 1px solid;
     border-radius: $rounded-lg;
     padding: 8px;
-    // border-radius: $border-radius;
   }
 
   #mpris-player {
     border: $border;
-    border-radius: $border-radius;
+    border-radius: $rounded-lg;
 
     .album-art {
       border-radius: $border-radius;
@@ -101,4 +100,47 @@
     }
   }
 
+}
+
+.calendar {
+
+  .container {
+    background: $color00;
+    border: 2px solid $bg-alt;
+  }
+
+  .date-widget {
+    label {
+      color: $color01;
+    }
+
+    .separator {
+      color: $color06;
+    }
+  }
+
+  calendar {
+    all: unset;
+    color: $color01;
+    font-size: 14px;
+
+    &.header {
+      border: none;
+    }
+
+    &.highlight {
+      background-color: transparent;
+      color: $color05;
+    }
+
+    &:selected {
+      background: transparent;
+      border-radius: 8px;
+      color: $color04;
+    }
+
+    &:indeterminate {
+      color: transparentize($color01, 0.6);
+    }
+  }
 }

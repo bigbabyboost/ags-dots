@@ -2,6 +2,7 @@ import icons from "lib/icons";
 import { getYearPogress, isLeapYear, timePassedInADay } from "module-vars/misc";
 import { uptime } from "module-vars/sysinfo";
 import { options } from "options";
+import { date } from "widgets/bar/modules/Clock";
 
 const { profile_picture } = options.quicksettings;
 const css = `
@@ -41,22 +42,22 @@ const Buttons = () => {
 };
 
 const DayProgress = () => {
-  const progress = Variable(0, {
-    poll: [1000 * 60 * 10, () => timePassedInADay()],
-  });
-
   return Widget.Overlay({
     class_name: "day-progress",
-    child: Widget.LevelBar({
+  }).hook(date, (self) => {
+    const timePassed = timePassedInADay(date.value);
+
+    self.child = Widget.LevelBar({
       vexpand: true,
       max_value: 100,
-      value: progress.bind(),
-    }),
-    overlays: [
-      Widget.Label({
-        label: progress.bind().as((v) => `Day passed: ${v}%`),
-      }),
-    ],
+      value: timePassed,
+    });
+
+    self.overlay = Widget.Label({
+      label: `Day passed: ${timePassed}%`,
+    });
+
+    self.show_all();
   });
 };
 
