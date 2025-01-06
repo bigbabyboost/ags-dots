@@ -1,8 +1,10 @@
 import icons from "lib/icons";
-import { getYearPogress, isLeapYear, timePassedInADay } from "module-vars/misc";
+import { bash } from "lib/utils";
+import { timePassedInADay } from "module-vars/misc";
 import { uptime } from "module-vars/sysinfo";
 import { options } from "options";
 import { date } from "widgets/bar/modules/Clock";
+import { alert } from "widgets/dialog/Alert";
 
 const { profile_picture } = options.quicksettings;
 const css = `
@@ -28,59 +30,57 @@ const Buttons = () => {
     on_primary_click: () => Utils.exec("hyprlock"),
   });
 
-  const power = Widget.Button({
-    class_name: "power",
-    child: Widget.Icon({ icon: icons.powermenu.shutdown }),
+  const logOut = Widget.Button({
+    class_name: "logOut",
+    child: Widget.Icon({ icon: icons.powermenu.logout }),
+    on_primary_click: () =>
+      alert.setValue({
+        title: "Logout",
+        func: () => bash(`notify-send ${Utils.exec("whoami")}`),
+      }),
   });
 
   return Widget.Box({
     vertical: false,
     spacing: 4,
     class_name: "buttons-container",
-    children: [uptimeInfo, lock, power],
+    children: [uptimeInfo, lock, logOut],
   });
 };
 
 const DayProgress = () => {
-  return Widget.Overlay({
+  return Widget.Box({
     class_name: "day-progress",
+    vertical: true,
+    spacing: 4,
   }).hook(date, (self) => {
     const timePassed = timePassedInADay(date.value);
 
-    self.child = Widget.LevelBar({
-      vexpand: true,
-      max_value: 100,
-      value: timePassed,
-    });
+    self.children = [
+      Widget.Box({
+        class_name: "day-progress label-container",
+        css: "border-radius: 6px; padding: 1px 0;",
+        child: Widget.Label({
+          hexpand: true,
+          label: `${date.value.format("%A")} : ${timePassed}%`,
+        }),
+      }),
 
-    self.overlay = Widget.Label({
-      label: `Day passed: ${timePassed}%`,
-    });
+      Widget.LevelBar({
+        hexpand: true,
+        max_value: 100,
+        value: timePassed,
+      }),
+    ];
 
     self.show_all();
-  });
-};
-
-const YearProgress = () => {
-  const date = new Date();
-  const totalDays = isLeapYear(date.getFullYear()) ? 366 : 365;
-  const currentDay = getYearPogress(date);
-  const daysPassedPercentage = Math.floor((currentDay * 100) / totalDays);
-
-  return Widget.Overlay({
-    child: Widget.LevelBar({
-      vexpand: true,
-      max_value: totalDays,
-      value: currentDay,
-    }),
-    overlays: [Widget.Label(`Year Progress ${daysPassedPercentage}%`)],
   });
 };
 
 const Options = Widget.Box({
   class_name: "options",
   vertical: true,
-  spacing: 10,
+  spacing: 6,
   hexpand: true,
   css: "border-radius: 8px; padding: 8px;",
   children: [Buttons(), DayProgress()],

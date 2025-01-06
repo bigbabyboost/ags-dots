@@ -80,7 +80,6 @@
   .profile {
     .buttons-container {
       button {
-        // all: unset;
         background: $color00;
         color: $color01;
         min-height: 26px;
@@ -96,7 +95,14 @@
     }
 
     .day-progress {
+      background: $color00;
+      padding: 6px;
+      border-radius: 6px;
       color: $color01;
+    }
+
+    levelbar trough block.empty {
+      background: transparentize($color01, 0.8)
     }
   }
 

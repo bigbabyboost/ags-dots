@@ -1,5 +1,5 @@
 import Bar from "./bar/Bar.ts";
-import Mpris from "./mpris/Mpris.ts";
+import Alert from "./dialog/Alert.ts";
 import NotificationPopups from "./notifications/NotificationPopups.ts";
 import NotificationCenter from "./notifications/notification-center/NotificationCenter";
 import OSD from "./osd/OSD.ts";
@@ -16,5 +16,6 @@ export default {
     QuickSettings(),
     NotificationCenter(),
     Flatpak(),
+    Alert(),
   ],
 };
