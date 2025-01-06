@@ -2,7 +2,7 @@
 > AGS V1 is no longer actively maintained. If you install AGS from any package manager, it will default to V2, which is a Scaffolding CLI for Astal+TypeScript. My configuration is based on V1. Since the two versions differ significantly, my config will not work with the latest AGS. To install AGS V1, follow [these instructions](https://github.com/ImRayy/ags-dots/issues/3#issuecomment-2563322949)
 ---
 
-![banner](https://ik.imagekit.io/rayshold/dotfiles/hyprland-gruvbox-02.png?updatedAt=1736094024314)
+![banner](https://ik.imagekit.io/rayshold/dotfiles/hyprland-gruvbox-02.png?updatedAt=1736180697858)
 
 |![wall-picker](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-134310_hyprshot.png?updatedAt=1730733654687)|![image-old](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-133359_hyprshot.png?updatedAt=1730733654701)|
 |---|---|
