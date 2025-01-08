@@ -32,7 +32,7 @@
 
 ## Requirements
 
-- `bun` - for building & compiling stuff
+- `bun` - for building & compiling stuff (if you are using nixos and got illegal core dumped, make derivation and pull bun from github release)
 - `sassc` - to compile "scss" files to "css"
 - `pipewire` - volume Control
 - `libgtop` - resource usage
