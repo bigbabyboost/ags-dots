@@ -1,9 +1,8 @@
 const home = `/home/${Utils.exec("whoami")}`;
 
 export const options = {
+  terminal: "kitty",
   quicksettings: {
-    // profile_picture:
-    //   "https://ik.imagekit.io/rayshold/gallery/lofi-anime-boy_863013-93642.avif",
     profile_picture: `${home}/.profile.png`,
     screenshot: {
       path: `${home}/Pictures/screenshots`,

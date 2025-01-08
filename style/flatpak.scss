@@ -2,32 +2,29 @@
 
 #flatpak-updates {
   background-color: $base;
-  border: $border;
-  border-color: $color03;
-  border-radius: $border-radius;
+  border: 1px solid;
+  border-radius: $rounded-lg;
+  ;
 
   .update-list {
     background-color: $bg-alt;
     padding: 4px;
-    border: $border;
     border-radius: $border-radius;
   }
 
+
   .update-item {
     background: inherit;
-    padding: 4px 12px;
+    padding: 4px 0 4px 4px;
     color: $text-dimmed;
 
-    .download-icon {
-      color: $color06;
+    .update-icon {
+      color: $color05;
+      font-size: 18;
     }
 
     &:hover {
       background-color: $color00;
-
-      .download-icon {
-        color: $color05;
-      }
     }
 
   }
@@ -36,9 +33,21 @@
     color: $color01;
   }
 
-  .update-all {
+  .action-buttons {
     button {
       @include button;
+      min-height: 32px;
+      padding: 0 12px 0 12px;
+    }
+
+    &.update {
+      background: $color03;
+      color: $base;
+    }
+
+    &.cancel:hover {
+      background: $color04;
     }
   }
+
 }
