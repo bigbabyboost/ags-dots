@@ -4,7 +4,7 @@
 
 ![banner](https://ik.imagekit.io/rayshold/dotfiles/hyprland-gruvbox-02.png?updatedAt=1736180697858)
 
-|![wall-picker](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-134310_hyprshot.png?updatedAt=1730733654687)|![image-old](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-133359_hyprshot.png?updatedAt=1730733654701)|
+|![wall-picker](https://ik.imagekit.io/rayshold/dotfiles/ags/wallpaper-picker-v2.webp)|![image-old](https://ik.imagekit.io/rayshold/dotfiles/ags/2024-11-04-133359_hyprshot.png?updatedAt=1730733654701)|
 |---|---|
 |wall picker|[old config](https://github.com/ImRayy/ags-dots/tree/square-border) |
 
@@ -12,17 +12,23 @@
 
 <details>
     <summary><code>Flatpak widget with updates & no-updates</code></summary>
+    <br/>
+    <p>You can toggle this by clicking on the flatpak-counter module on the bar widget</p>
     <table>
       <tr>
         <td>
-          <img src="https://ik.imagekit.io/rayshold/dotfiles/ags/ags-flatpakt.png?updatedAt=1730780831581" alt="flatpak full">
+          <img src="https://ik.imagekit.io/rayshold/dotfiles/ags/flatpak-loading-v2.png" alt="flatpak loading">
         </td>
         <td>
-          <img src="https://ik.imagekit.io/rayshold/dotfiles/ags/flatpak-empty.png?updatedAt=1730781288069" alt="flatpak empty">
+          <img src="https://ik.imagekit.io/rayshold/dotfiles/ags/flatpak-updates-v2.png" alt="flatpak full">
+        </td>
+        <td>
+          <img src="https://ik.imagekit.io/rayshold/dotfiles/ags/flatpak-noupdates-v2.png" alt="flatpak-noupdates"/>
         </td>
       </tr>
       <tr>
-        <td align="center">With Updates</td>
+        <td align="center">Loading</td>
+        <td align="center">Updates</td>
         <td align="center">No Updates</td>
       </tr>
     </table>
@@ -47,11 +53,11 @@ Sometimes I forget which packages are required, so I may not always update the R
 
 **Fonts**
 
-- `CommitMono Nerd Font`
+- `JetBrainsMono Nerd Font`
 
 **Optional**
 
-- `inotify-tools` - for hot-reload script
+- `inotify-tools` - for hot-reload script, wallpaper picker etc
 
 ## Installation
 
