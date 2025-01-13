@@ -21,7 +21,6 @@ const parseFlatpakUpdates = (out: string): Flatpak[] => {
 
   return splits.map((item, index) => {
     const split = item.split("\t");
-    const version = split[2]?.match(/(\d+(\.\d+){1,2})$/)?.[1];
 
     if (index === splits.length - 1) {
       loading.setValue(false);
@@ -30,7 +29,7 @@ const parseFlatpakUpdates = (out: string): Flatpak[] => {
     return {
       id: split[1],
       name: split[0],
-      version: version || "-----",
+      version: split[2] || "-----",
       arch: split[3],
     };
   });
