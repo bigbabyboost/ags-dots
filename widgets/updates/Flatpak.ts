@@ -1,10 +1,13 @@
+import { Fallback } from "custom-widgets/Fallback";
+import icons from "lib/icons";
 import { bash } from "lib/utils";
 import {
   type Flatpak,
   flatpakUpdates,
+  loading,
   refetchFlatpakUpdates,
 } from "module-vars/updates/flatpak";
-import { Fallback } from "custom-widgets/Fallback";
+import { options } from "options";
 
 const WINDOW_NAME = "flatpak-updates";
 
@@ -16,18 +19,25 @@ const UpdateItem = (update: Flatpak) => {
     label: update.name,
   });
 
-  const version = Widget.Label({ label: update.version });
-  const downloadIcon = Widget.Label({
-    class_name: "download-icon",
-    label: "󰇚 ",
+  const icon = Widget.Icon({ icon: update.id, size: 20 });
+
+  const version = Widget.Label({
+    class_name: "update-value",
+    label: update.version,
+  });
+  const updateIcon = Widget.Label({
+    class_name: "update-icon",
+    label: "󰁡 ",
   });
 
   const meta = Widget.Box({
+    spacing: 6,
     children: [
-      downloadIcon,
+      icon,
       name,
       Widget.Separator({ hexpand: true }),
       version,
+      updateIcon,
     ],
   });
 
@@ -53,36 +63,43 @@ const UpdateList = () =>
     }),
   });
 
-const UpdateAll = Widget.Box({
-  children: [
-    Widget.Box({
-      class_name: "update-all",
-      children: [
-        Widget.Separator({ hexpand: true }),
-        Widget.Button({
-          label: "󰚰 Update All",
-          on_primary_click: () => {
-            App.closeWindow(WINDOW_NAME);
-            bash("foot -e --hold flatpak update").then(() =>
-              refetchFlatpakUpdates(),
-            );
-          },
-        }),
-      ],
-    }),
-  ],
-});
+const ActionButtons = () => {
+  const cancelBtn = Widget.Button({
+    class_name: "action-buttons cancel",
+    label: "Cancel",
+    on_primary_click: () => App.closeWindow(WINDOW_NAME),
+  });
+
+  const updateBtn = Widget.Button({
+    class_name: "action-buttons update",
+    label: "Update all",
+    on_primary_click: () => {
+      App.closeWindow(WINDOW_NAME);
+      loading.setValue(true);
+      bash(`${options.terminal} -e --hold flatpak update`).then(() =>
+        refetchFlatpakUpdates(),
+      );
+    },
+  });
+
+  return Widget.Box({
+    class_name: "action-buttons",
+    hpack: "end",
+    spacing: 8,
+    children: [cancelBtn, updateBtn],
+  });
+};
 
 const Updates = Widget.Box({
   vertical: true,
-  css: "min-width:28rem; min-height: 16rem;",
+  css: "min-width:24rem; min-height: 14rem;",
   spacing: 8,
-  children: [UpdateList(), UpdateAll],
+  children: [UpdateList(), ActionButtons()],
 });
 
 const UpdatesPopup = () =>
   Widget.Box({
-    css: "min-width:28rem; min-height: 16rem; padding: 8px;",
+    css: "min-width:24rem; min-height: 14rem; padding: 8px;",
     children: [
       Widget.Box({}).hook(flatpakUpdates, (self) => {
         if (flatpakUpdates.value.length > 0) {
@@ -91,8 +108,10 @@ const UpdatesPopup = () =>
           self.children = [
             Fallback({
               iconType: "label",
-              icon: "🎊",
-              label: "All apps are updated :)",
+              icon: loading.bind().as((v) => (v ? "🍞" : "🎊")),
+              label: loading
+                .bind()
+                .as((v) => (v ? "Loading..." : "All apps are updated :)")),
             }),
           ];
       }),

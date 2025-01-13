@@ -7,27 +7,50 @@ export type Flatpak = {
   arch: string;
 };
 
-const updateCmd = "flatpak remote-ls --updates --app";
+const updateAppStreamCmd = "flatpak update --appstream &>/dev/null";
+const showUpdatesCmd = "flatpak remote-ls --updates --app";
+export const loading = Variable(true);
 
 const parseFlatpakUpdates = (out: string): Flatpak[] => {
-  if (out === "") return [];
-  return out.split("\n").map((item) => {
+  if (out === "") {
+    loading.setValue(false);
+    return [];
+  }
+
+  const splits = out.split("\n");
+
+  return splits.map((item, index) => {
     const split = item.split("\t");
-    const version = split[2]?.match(/(\d+(\.\d+){1,2})$/)?.[1];
+
+    if (index === splits.length - 1) {
+      loading.setValue(false);
+    }
+
     return {
       id: split[1],
       name: split[0],
-      version: version || "-----",
+      version: split[2] || "-----",
       arch: split[3],
     };
   });
 };
 
 export const flatpakUpdates = Variable([] as Flatpak[], {
-  poll: [1000 * 60 * 30, updateCmd, (out) => parseFlatpakUpdates(out)],
+  poll: [
+    1000 * 60 * 30,
+    [
+      "bash",
+      "-c",
+      `
+      ${updateAppStreamCmd}
+      ${showUpdatesCmd} 
+      `,
+    ],
+    (out) => parseFlatpakUpdates(out),
+  ],
 });
 
 export const refetchFlatpakUpdates = () =>
-  bash(updateCmd).then((out) => {
-    flatpakUpdates.setValue(parseFlatpakUpdates(out));
-  });
+  bash(showUpdatesCmd).then((out) =>
+    flatpakUpdates.setValue(parseFlatpakUpdates(out)),
+  );

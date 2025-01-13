@@ -60,7 +60,6 @@ highlight {
 
 .cpu-usage,
 .memory-usage,
-.flatpak-updates-count,
 .client-title,
 .volume-indicator,
 .clock {
@@ -77,6 +76,20 @@ highlight {
     background: $accent;
     padding-left: 10px;
     color: $color01;
+  }
+}
+
+.flatpak-updates-count {
+  @include transition-color;
+  all: unset;
+  background: $accent;
+  border-radius: $rounded-md;
+  color: $color01;
+  padding: 0 10px;
+
+  &:hover {
+    background: $color03;
+    color: $base;
   }
 }
 

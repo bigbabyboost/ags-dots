@@ -1,8 +1,12 @@
+import type { Binding } from "types/service";
+
 type FallbackProps = {
   iconType?: "label" | "icon";
-  icon: string;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  icon: string | Binding<any, any, string>;
   iconSize?: number;
-  label?: string;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  label?: string | Binding<any, any, string>;
 };
 
 export const Fallback = ({
